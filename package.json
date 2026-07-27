@@ -1,0 +1,50 @@
+{
+  "name": "re-triever",
+  "version": "1.0.0",
+  "description": "Zero-setup background version control with content-defined chunking",
+  "main": "src/main/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build:core": "napi build --platform --release --cargo-cwd core build",
+    "build:core:debug": "napi build --platform --cargo-cwd core build",
+    "build:renderer": "vite build",
+    "start": "electron .",
+    "fix:electron": "xattr -cr node_modules/electron/dist/Electron.app 2>/dev/null || true && codesign --force --deep --sign - node_modules/electron/dist/Electron.app 2>/dev/null || true",
+    "electron:dev": "vite build && electron ."
+  },
+  "keywords": [
+    "version-control",
+    "deduplication",
+    "cdc",
+    "electron",
+    "rust"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@napi-rs/cli": "^2.18.4",
+    "chokidar": "^3.6.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "electron": "^31.7.7",
+    "font-awesome": "^4.7.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^4.0.0",
+    "vite": "^5.3.1"
+  },
+  "allowScripts": {
+    "electron@31.7.7": true,
+    "esbuild@0.21.5": true
+  }
+}
