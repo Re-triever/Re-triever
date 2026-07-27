@@ -310,7 +310,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { commitFile, addWatchedFolder, removeWatchedFolder, getWatchedFolders, getRecentCommits, restoreFileVersion, getStorageStats } = nativeBinding
+const { commitFile, addWatchedFolder, removeWatchedFolder, getWatchedFolders, getRecentCommits, restoreFileVersion, getStorageStats, resetAllData } = nativeBinding
 
 module.exports.commitFile = commitFile
 module.exports.addWatchedFolder = addWatchedFolder
@@ -319,3 +319,4 @@ module.exports.getWatchedFolders = getWatchedFolders
 module.exports.getRecentCommits = getRecentCommits
 module.exports.restoreFileVersion = restoreFileVersion
 module.exports.getStorageStats = getStorageStats
+module.exports.resetAllData = resetAllData

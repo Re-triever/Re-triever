@@ -10,3 +10,4 @@ export declare function getWatchedFolders(): string
 export declare function getRecentCommits(limit: number): string
 export declare function restoreFileVersion(commitId: string, targetPath: string): boolean
 export declare function getStorageStats(): string
+export declare function resetAllData(): boolean

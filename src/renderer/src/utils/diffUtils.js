@@ -70,22 +70,11 @@ export function formatTimeAgo(isoString) {
 export function getFileTypeBadge(filename, theme = 'dark') {
   const ext = filename ? filename.split('.').pop().toLowerCase() : '';
   const isDark = theme === 'dark';
-  if (['pptx', 'ppt'].includes(ext)) {
-    return { label: 'PPTX', color: isDark ? 'bg-orange-500/20 text-orange-400 border-orange-500/30' : 'bg-orange-100 text-orange-700 border-orange-200 font-semibold' };
-  }
-  if (['docx', 'doc'].includes(ext)) {
-    return { label: 'DOCX', color: isDark ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' : 'bg-blue-100 text-blue-700 border-blue-200 font-semibold' };
-  }
-  if (['xlsx', 'xls', 'csv'].includes(ext)) {
-    return { label: 'XLSX', color: isDark ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-emerald-100 text-emerald-700 border-emerald-200 font-semibold' };
-  }
-  if (['pdf'].includes(ext)) {
-    return { label: 'PDF', color: isDark ? 'bg-rose-500/20 text-rose-400 border-rose-500/30' : 'bg-rose-100 text-rose-700 border-rose-200 font-semibold' };
-  }
-  if (['png', 'jpg', 'jpeg', 'svg', 'webp'].includes(ext)) {
-    return { label: 'IMG', color: isDark ? 'bg-purple-500/20 text-purple-400 border-purple-500/30' : 'bg-purple-100 text-purple-700 border-purple-200 font-semibold' };
-  }
-  return { label: ext.toUpperCase().substring(0, 4) || 'FILE', color: isDark ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-slate-100 text-slate-700 border-slate-300 font-semibold' };
+  const label = ext ? ext.toUpperCase().substring(0, 4) : 'FILE';
+  const color = isDark 
+    ? 'bg-zinc-800 text-zinc-200 border-zinc-700 font-semibold' 
+    : 'bg-zinc-100 text-zinc-900 border-zinc-300 font-semibold shadow-xs';
+  return { label, color };
 }
 
 export function getRestoredInfo(commit, idx, historyArray) {

@@ -82,3 +82,20 @@ pub fn get_storage_stats() -> Result<String> {
     let stats = storage.get_stats().map_err(Error::from_reason)?;
     serde_json::to_string(&stats).map_err(|e| Error::from_reason(e.to_string()))
 }
+
+#[napi]
+pub fn reset_all_data() -> Result<bool> {
+    let mut guard = STORAGE_INSTANCE.lock().map_err(|e| Error::from_reason(format!("Lock poison error: {}", e)))?;
+    *guard = None;
+
+    let home = dirs::home_dir().ok_or_else(|| Error::from_reason("Could not locate home directory"))?;
+    let retriever_dir = home.join(".re-triever");
+    if retriever_dir.exists() {
+        let _ = std::fs::remove_dir_all(&retriever_dir);
+    }
+
+    let storage = Storage::init().map_err(Error::from_reason)?;
+    *guard = Some(storage);
+
+    Ok(true)
+}

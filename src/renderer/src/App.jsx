@@ -423,7 +423,7 @@ export default function App() {
 
   return (
     <div className={`w-full h-screen flex flex-col justify-between overflow-hidden border rounded-lg shadow-2xl transition-colors duration-200 ${
-      theme === 'dark' ? 'bg-slate-950 border-slate-800/80 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
+      theme === 'dark' ? 'bg-black border-zinc-800 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
     }`}>
       
       {/* 1. HEADER BAR */}
@@ -453,7 +453,7 @@ export default function App() {
 
       {/* 4. MAIN TAB CONTENT AREA */}
       <main className={`flex-1 overflow-hidden p-4 flex flex-col space-y-3 ${
-        theme === 'dark' ? 'bg-slate-950/80' : 'bg-slate-50'
+        theme === 'dark' ? 'bg-black' : 'bg-slate-50'
       }`}>
         <Toast toast={toast} />
 

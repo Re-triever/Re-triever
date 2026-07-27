@@ -4,7 +4,7 @@ import { ShieldCheck } from 'lucide-react';
 export default function Footer({ theme }) {
   return (
     <footer className={`px-4 py-2 border-t flex items-center justify-between text-[10px] transition-colors ${
-      theme === 'dark' ? 'bg-slate-900/90 border-slate-800/80 text-slate-500' : 'bg-white border-slate-200 text-slate-500'
+      theme === 'dark' ? 'bg-black border-zinc-800 text-zinc-400' : 'bg-white border-zinc-200 text-zinc-500'
     }`}>
       <span>Zero-Setup Automatic Version Control</span>
       <span className="text-emerald-500 font-medium flex items-center gap-1">

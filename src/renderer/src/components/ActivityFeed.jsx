@@ -10,10 +10,10 @@ export default function ActivityFeed({
   return (
     <div className="flex-1 overflow-y-auto space-y-2.5">
       {commits.length === 0 ? (
-        <div className="py-12 text-center flex flex-col items-center justify-center text-slate-500 space-y-2">
-          <Clock className={`w-8 h-8 stroke-1 ${theme === 'dark' ? 'text-slate-600' : 'text-slate-400'}`} />
-          <p className={`text-xs font-medium ${theme === 'dark' ? 'text-slate-400' : 'text-slate-700'}`}>No file saves recorded yet.</p>
-          <p className={`text-[11px] max-w-[240px] ${theme === 'dark' ? 'text-slate-600' : 'text-slate-500'}`}>
+        <div className="py-12 text-center flex flex-col items-center justify-center text-zinc-500 space-y-2">
+          <Clock className={`w-8 h-8 stroke-1 ${theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'}`} />
+          <p className={`text-xs font-medium ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-700'}`}>No file saves recorded yet.</p>
+          <p className={`text-[11px] max-w-[240px] ${theme === 'dark' ? 'text-zinc-600' : 'text-zinc-500'}`}>
             Re-triever will automatically back up and deduplicate files when you save them in watched folders.
           </p>
         </div>
@@ -29,8 +29,8 @@ export default function ActivityFeed({
               key={commit.id} 
               className={`p-3 border rounded-xl transition-all flex items-start justify-between group ${
                 theme === 'dark'
-                  ? 'bg-slate-900/60 hover:bg-slate-900 border-slate-800/80 hover:border-slate-700/80 text-slate-200'
-                  : 'bg-white hover:bg-slate-50 border-slate-200/90 hover:border-slate-300 text-slate-800 shadow-xs'
+                  ? 'bg-black hover:bg-zinc-900 border-zinc-800 text-zinc-200'
+                  : 'bg-white hover:bg-zinc-50 border-zinc-200 hover:border-zinc-300 text-zinc-800 shadow-xs'
               }`}
             >
               <div className="flex items-start space-x-3 min-w-0 flex-1 pr-2">
@@ -39,29 +39,29 @@ export default function ActivityFeed({
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className={`text-xs font-semibold truncate flex items-center gap-1.5 ${
-                    theme === 'dark' ? 'text-slate-200' : 'text-slate-900'
+                    theme === 'dark' ? 'text-zinc-200' : 'text-zinc-900'
                   }`}>
                     {fileName}
                   </div>
                   <div className={`text-[11px] truncate mt-0.5 flex items-center gap-1 ${
-                    theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
+                    theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
                   }`}>
-                    <span className={theme === 'dark' ? 'text-slate-500' : 'text-slate-400'}>in</span> {folderName}
-                    <span className={theme === 'dark' ? 'text-slate-600' : 'text-slate-300'}>•</span>
+                    <span className={theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'}>in</span> {folderName}
+                    <span className={theme === 'dark' ? 'text-zinc-600' : 'text-zinc-300'}>•</span>
                     <span>{formatBytes(commit.file_size)}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-1.5">
                     <span className={`text-[10px] flex items-center gap-1 ${
-                      theme === 'dark' ? 'text-slate-500' : 'text-slate-400'
+                      theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'
                     }`}>
-                      <Clock className={`w-3 h-3 ${theme === 'dark' ? 'text-slate-600' : 'text-slate-400'}`} />
+                      <Clock className={`w-3 h-3 ${theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'}`} />
                       {formatTimeAgo(commit.timestamp)}
                     </span>
                     {isDeduped && (
                       <span className={`text-[10px] font-medium px-1.5 py-0.2 rounded border flex items-center gap-0.5 ${
                         theme === 'dark' 
-                          ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' 
-                          : 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                          ? 'text-zinc-300 bg-zinc-800 border-zinc-700' 
+                          : 'text-zinc-800 bg-zinc-100 border-zinc-300'
                       }`}>
                         <Sparkles className="w-2.5 h-2.5" />
                         {formatBytes(commit.deduplicated_bytes)} deduplicated
@@ -76,8 +76,8 @@ export default function ActivityFeed({
                   onClick={() => onViewFileLog(commit.file_path, fileName)}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all flex items-center gap-1.5 shrink-0 shadow-xs ${
                     theme === 'dark'
-                      ? 'bg-emerald-950/80 hover:bg-emerald-600 text-emerald-400 hover:text-white border-emerald-500/40 hover:border-emerald-400'
-                      : 'bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white border-emerald-200'
+                      ? 'bg-zinc-100 hover:bg-white text-black border-zinc-200'
+                      : 'bg-black hover:bg-zinc-800 text-white border-black'
                   }`}
                   title="View File Log & Visual Timeline"
                 >

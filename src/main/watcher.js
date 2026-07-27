@@ -98,6 +98,10 @@ class FileWatcherService {
     this.watchers.clear();
     this.watchedFolders.clear();
   }
+
+  unwatchAll() {
+    this.closeAll();
+  }
 }
 
 module.exports = FileWatcherService;

@@ -194,6 +194,30 @@ class JSStorageFallback {
     fs.writeFileSync(targetPath, content);
     return true;
   }
+
+  reset() {
+    this.data = {
+      watchedFolders: [],
+      commits: [],
+      stats: {
+        totalCommits: 0,
+        totalBlobs: 0,
+        totalStoredBytes: 0,
+        totalDeduplicatedBytes: 0,
+        totalOriginalBytes: 0,
+        watchedFolderCount: 0
+      }
+    };
+    if (fs.existsSync(this.retrieverDir)) {
+      try {
+        fs.rmSync(this.retrieverDir, { recursive: true, force: true });
+      } catch (e) {
+        console.error('Failed to rmSync in JS fallback:', e);
+      }
+    }
+    fs.mkdirSync(this.blobsDir, { recursive: true });
+    this.save();
+  }
 }
 
 const jsFallback = new JSStorageFallback();
@@ -612,14 +636,22 @@ function clearTempMemoryCore() {
 function resetAllDataCore() {
   try {
     if (watcherService) {
-      watcherService.unwatchAll();
+      watcherService.closeAll();
     }
-    const home = app.getPath('home');
-    const retrieverDir = path.join(home, '.re-triever');
-    if (fs.existsSync(retrieverDir)) {
-      fs.rmSync(retrieverDir, { recursive: true, force: true });
+
+    if (nativeCore && nativeCore.resetAllData) {
+      nativeCore.resetAllData();
+    } else {
+      const home = app.getPath('home');
+      const retrieverDir = path.join(home, '.re-triever');
+      if (fs.existsSync(retrieverDir)) {
+        fs.rmSync(retrieverDir, { recursive: true, force: true });
+      }
+      fs.mkdirSync(path.join(retrieverDir, 'blobs'), { recursive: true });
     }
-    fs.mkdirSync(retrieverDir, { recursive: true });
+
+    jsFallback.reset();
+
     return { success: true };
   } catch (e) {
     console.error('Error resetting all data:', e);
@@ -633,7 +665,7 @@ function uninstallIntegrationCore() {
       contextMenuManager.unregister();
     }
     if (watcherService) {
-      watcherService.unwatchAll();
+      watcherService.closeAll();
     }
     return { success: true };
   } catch (e) {
