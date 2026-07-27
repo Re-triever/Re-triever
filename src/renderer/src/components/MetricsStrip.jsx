@@ -2,7 +2,11 @@ import React from 'react';
 import { Zap, Layers, Folder } from 'lucide-react';
 import { formatBytes } from '../utils/diffUtils';
 
-export default function MetricsStrip({ theme, stats, watchedFolderCount }) {
+export default function MetricsStrip({ theme, stats = {}, watchedFolderCount = 0 }) {
+  const totalCommits = stats.totalCommits ?? stats.total_commits ?? 0;
+  const totalDeduplicatedBytes = stats.totalDeduplicatedBytes ?? stats.total_deduplicated_bytes ?? 0;
+  const folderCount = stats.watchedFolderCount ?? stats.watched_folder_count ?? watchedFolderCount;
+
   return (
     <div className={`px-4 py-2 border-b grid grid-cols-3 gap-2 ${
       theme === 'dark' ? 'bg-slate-900/40 border-slate-800/60' : 'bg-slate-100/70 border-slate-200'
@@ -15,7 +19,7 @@ export default function MetricsStrip({ theme, stats, watchedFolderCount }) {
           <Zap className="w-3 h-3 text-emerald-500" /> Saved Space
         </div>
         <div className="text-xs font-bold text-emerald-500 mt-0.5">
-          {formatBytes(stats.totalDeduplicatedBytes || 0)}
+          {formatBytes(totalDeduplicatedBytes)}
         </div>
       </div>
 
@@ -27,7 +31,7 @@ export default function MetricsStrip({ theme, stats, watchedFolderCount }) {
           <Layers className="w-3 h-3 text-cyan-500" /> Total Saves
         </div>
         <div className={`text-xs font-bold mt-0.5 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-          {stats.totalCommits || 0}
+          {totalCommits}
         </div>
       </div>
 
@@ -39,7 +43,7 @@ export default function MetricsStrip({ theme, stats, watchedFolderCount }) {
           <Folder className="w-3 h-3 text-purple-500" /> Folders Watched
         </div>
         <div className={`text-xs font-bold mt-0.5 ${theme === 'dark' ? 'text-purple-300' : 'text-purple-700'}`}>
-          {stats.watchedFolderCount || watchedFolderCount}
+          {folderCount}
         </div>
       </div>
     </div>

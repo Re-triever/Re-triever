@@ -274,10 +274,39 @@ function getRecentCommitsCore(limit = 50) {
 }
 
 function getStorageStatsCore() {
+  let stats = {};
   if (nativeCore && nativeCore.getStorageStats) {
-    return JSON.parse(nativeCore.getStorageStats());
+    try {
+      stats = JSON.parse(nativeCore.getStorageStats());
+    } catch (e) {
+      console.error('Failed to parse storage stats from native core:', e);
+      stats = {};
+    }
+  } else {
+    stats = jsFallback.getStats();
   }
-  return jsFallback.getStats();
+
+  const totalCommits = stats.total_commits !== undefined ? stats.total_commits : (stats.totalCommits || 0);
+  const totalBlobs = stats.total_blobs !== undefined ? stats.total_blobs : (stats.totalBlobs || 0);
+  const totalStoredBytes = stats.total_stored_bytes !== undefined ? stats.total_stored_bytes : (stats.totalStoredBytes || 0);
+  const totalDeduplicatedBytes = stats.total_deduplicated_bytes !== undefined ? stats.total_deduplicated_bytes : (stats.totalDeduplicatedBytes || 0);
+  const totalOriginalBytes = stats.total_original_bytes !== undefined ? stats.total_original_bytes : (stats.totalOriginalBytes || 0);
+  const watchedFolderCount = stats.watched_folder_count !== undefined ? stats.watched_folder_count : (stats.watchedFolderCount || 0);
+
+  return {
+    totalCommits,
+    totalBlobs,
+    totalStoredBytes,
+    totalDeduplicatedBytes,
+    totalOriginalBytes,
+    watchedFolderCount,
+    total_commits: totalCommits,
+    total_blobs: totalBlobs,
+    total_stored_bytes: totalStoredBytes,
+    total_deduplicated_bytes: totalDeduplicatedBytes,
+    total_original_bytes: totalOriginalBytes,
+    watched_folder_count: watchedFolderCount
+  };
 }
 
 function restoreFileVersionCore(commitId, targetPath) {
