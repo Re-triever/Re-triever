@@ -10,36 +10,40 @@ class TrayPopoverManager {
   }
 
   init() {
-    // Hide dock icon on macOS to operate purely in menu bar
+    // Enable dock icon on macOS for easy access alongside Menu Bar
     if (app.dock) {
-      app.dock.hide();
+      app.dock.show();
+      app.dock.setIcon(this.createTrayIconImage('active'));
     }
 
     this.createTrayIcon();
     this.createPopoverWindow();
   }
 
-  // Generate dynamic native tray icon canvas (16x16 with status indicator dot)
+  // Generate dynamic native tray icon image with status indicator dot
   createTrayIconImage(status = 'active') {
-    // Standard icon representation using canvas/nativeImage PNG buffer or SVG
-    // We create a clean 22x22 template image with status dot
     const colorHex = status === 'chunking' ? '#F59E0B' : status === 'error' ? '#EF4444' : '#10B981';
     
-    const svgIcon = `
-      <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="8" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-        <path d="M8 11 L10 13 L14 9" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="17" cy="5" r="4" fill="${colorHex}"/>
-      </svg>
-    `;
+    const svgIcon = `<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="22" rx="6" fill="#10B981"/>
+      <path d="M7 11 L10 14 L15 8" fill="none" stroke="#090D16" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="17" cy="5" r="4" fill="${colorHex}" stroke="#FFFFFF" stroke-width="1.5"/>
+    </svg>`;
 
-    return nativeImage.createFromBuffer(Buffer.from(svgIcon));
+    const dataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(svgIcon)}`;
+    const img = nativeImage.createFromDataURL(dataUrl);
+    return img.resize({ width: 22, height: 22 });
   }
 
   createTrayIcon() {
     const icon = this.createTrayIconImage(this.status);
     this.tray = new Tray(icon);
     this.tray.setToolTip('Re-triever - Version Control Active');
+
+    // Add visible title in macOS Menu Bar
+    if (process.platform === 'darwin') {
+      this.tray.setTitle(' Re-triever');
+    }
 
     this.tray.on('click', () => {
       this.togglePopover();
@@ -71,13 +75,15 @@ class TrayPopoverManager {
 
   createPopoverWindow() {
     this.popoverWindow = new BrowserWindow({
-      width: 420,
-      height: 600,
+      width: 960,
+      height: 680,
+      minWidth: 720,
+      minHeight: 500,
       show: false,
       frame: false,
-      resizable: false,
+      resizable: true,
       alwaysOnTop: true,
-      skipTaskbar: true,
+      skipTaskbar: false,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,

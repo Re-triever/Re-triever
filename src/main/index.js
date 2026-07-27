@@ -131,6 +131,50 @@ class JSStorageFallback {
     return this.data.commits.slice(0, limit);
   }
 
+  getAllTrackedFiles() {
+    const fileMap = new Map();
+    for (const c of this.data.commits) {
+      if (!c.file_path) continue;
+      if (!fileMap.has(c.file_path)) {
+        fileMap.set(c.file_path, {
+          filePath: c.file_path,
+          fileName: c.file_path.split('/').pop(),
+          commitCount: 0,
+          latestCommit: c,
+          totalDeduplicatedBytes: 0,
+          fileSize: c.file_size
+        });
+      }
+      const entry = fileMap.get(c.file_path);
+      entry.commitCount += 1;
+      entry.totalDeduplicatedBytes += (c.deduplicated_bytes || 0);
+    }
+    return Array.from(fileMap.values());
+  }
+
+  getFileHistory(filePath) {
+    return this.data.commits.filter(c => c.file_path === filePath);
+  }
+
+  getFileContent(commitId) {
+    const commit = this.data.commits.find(c => c.id === commitId);
+    if (!commit) return { success: false, error: 'Commit not found' };
+
+    const blobPath = path.join(this.blobsDir, commit.commit_hash);
+    if (!fs.existsSync(blobPath)) return { success: false, error: 'Blob file missing' };
+
+    try {
+      const buffer = fs.readFileSync(blobPath);
+      const isBinary = buffer.some(byte => byte === 0);
+      if (isBinary) {
+        return { success: true, isBinary: true, content: null, commit };
+      }
+      return { success: true, isBinary: false, content: buffer.toString('utf-8'), commit };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  }
+
   getStats() {
     return this.data.stats;
   }
@@ -174,13 +218,31 @@ if (!gotSingleInstanceLock) {
   });
 }
 
+// Pending restores map to tag newly created commits with restored_from metadata
+const pendingRestoreMap = new Map();
+
 // Core Rust vs JS dispatchers
 function commitFileCore(filePath) {
+  const normPath = path.normalize(filePath).toLowerCase();
+  const pendingRestore = pendingRestoreMap.get(normPath);
+
+  let commitInfo;
   if (nativeCore && nativeCore.commitFile) {
     const resStr = nativeCore.commitFile(filePath);
-    return JSON.parse(resStr);
+    commitInfo = JSON.parse(resStr);
+  } else {
+    commitInfo = jsFallback.commitFile(filePath);
   }
-  return jsFallback.commitFile(filePath);
+
+  if (pendingRestore && (Date.now() - pendingRestore.timestamp < 15000)) {
+    if (commitInfo) {
+      commitInfo.restored_from = pendingRestore.commitId;
+      commitInfo.is_restored = true;
+    }
+    pendingRestoreMap.delete(normPath);
+  }
+
+  return commitInfo;
 }
 
 function addFolderCore(folderPath) {
@@ -219,10 +281,72 @@ function getStorageStatsCore() {
 }
 
 function restoreFileVersionCore(commitId, targetPath) {
+  const normPath = path.normalize(targetPath).toLowerCase();
+  pendingRestoreMap.set(normPath, {
+    commitId,
+    timestamp: Date.now()
+  });
+
   if (nativeCore && nativeCore.restoreFileVersion) {
     return nativeCore.restoreFileVersion(commitId, targetPath);
   }
   return jsFallback.restoreVersion(commitId, targetPath);
+}
+
+function getAllTrackedFilesCore() {
+  const commits = getRecentCommitsCore(1000) || [];
+  const fileMap = new Map();
+  for (const c of commits) {
+    if (!c.file_path) continue;
+    const normKey = path.normalize(c.file_path).toLowerCase();
+    if (!fileMap.has(normKey)) {
+      fileMap.set(normKey, {
+        filePath: c.file_path,
+        fileName: path.basename(c.file_path),
+        commitCount: 0,
+        latestCommit: c,
+        totalDeduplicatedBytes: 0,
+        fileSize: c.file_size
+      });
+    }
+    const entry = fileMap.get(normKey);
+    entry.commitCount += 1;
+    entry.totalDeduplicatedBytes += (c.deduplicated_bytes || 0);
+  }
+  return Array.from(fileMap.values());
+}
+
+function getFileHistoryCore(filePath) {
+  const commits = getRecentCommitsCore(1000) || [];
+  if (!filePath) return [];
+  const targetNorm = path.normalize(filePath).toLowerCase();
+  return commits.filter(c => c.file_path && path.normalize(c.file_path).toLowerCase() === targetNorm);
+}
+
+function getFileContentCore(commitId) {
+  const commits = getRecentCommitsCore(1000) || [];
+  const commit = commits.find(c => c.id === commitId || (c.id && c.id.startsWith(commitId)));
+  if (!commit) {
+    return jsFallback.getFileContent(commitId);
+  }
+
+  const retrieverDir = path.join(app.getPath('home'), '.re-triever');
+  const blobPath = path.join(retrieverDir, 'blobs', commit.commit_hash);
+
+  if (!fs.existsSync(blobPath)) {
+    return { success: false, error: 'Blob file missing' };
+  }
+
+  try {
+    const buffer = fs.readFileSync(blobPath);
+    const isBinary = buffer.some(byte => byte === 0);
+    if (isBinary) {
+      return { success: true, isBinary: true, content: null, commit };
+    }
+    return { success: true, isBinary: false, content: buffer.toString('utf-8'), commit };
+  } catch (e) {
+    return { success: false, error: e.message };
+  }
 }
 
 app.whenReady().then(() => {
@@ -319,6 +443,18 @@ app.whenReady().then(() => {
     return restoreFileVersionCore(commitId, targetPath);
   });
 
+  ipcMain.handle('get-all-tracked-files', async () => {
+    return getAllTrackedFilesCore();
+  });
+
+  ipcMain.handle('get-file-history', async (event, filePath) => {
+    return getFileHistoryCore(filePath);
+  });
+
+  ipcMain.handle('get-file-content', async (event, commitId) => {
+    return getFileContentCore(commitId);
+  });
+
   ipcMain.handle('select-folder-dialog', async () => {
     const window = trayManager.popoverWindow;
     const result = await dialog.showOpenDialog(window, {
@@ -340,11 +476,51 @@ app.whenReady().then(() => {
     }
     return null;
   });
+
+  ipcMain.handle('toggle-maximize', async () => {
+    const window = trayManager ? trayManager.popoverWindow : null;
+    if (window) {
+      if (window.isMaximized() || window.isFullScreen()) {
+        window.unmaximize();
+        window.setFullScreen(false);
+        return 'default';
+      } else {
+        window.maximize();
+        return 'maximized';
+      }
+    }
+    return 'default';
+  });
+
+  ipcMain.handle('reset-default-size', async () => {
+    const window = trayManager ? trayManager.popoverWindow : null;
+    if (window) {
+      if (window.isFullScreen()) window.setFullScreen(false);
+      if (window.isMaximized()) window.unmaximize();
+      window.setSize(960, 680);
+      if (trayManager) {
+        trayManager.showPopover();
+      }
+      return 'default';
+    }
+    return 'default';
+  });
+
+  ipcMain.handle('is-maximized', async () => {
+    const window = trayManager ? trayManager.popoverWindow : null;
+    return window ? (window.isMaximized() || window.isFullScreen()) : false;
+  });
 });
 
 app.on('open-url', (event, url) => {
   event.preventDefault();
   if (contextMenuManager) {
     contextMenuManager.handleProtocolUrl(url);
+  }
+});
+
+app.on('activate', () => {
+  if (trayManager) {
+    trayManager.showPopover();
   }
 });
