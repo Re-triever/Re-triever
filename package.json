@@ -8,6 +8,9 @@
     "build:core": "napi build --platform --release --cargo-cwd core build",
     "build:core:debug": "napi build --platform --cargo-cwd core build",
     "build:renderer": "vite build",
+    "build": "npm run build:core && npm run build:renderer",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir",
     "start": "electron .",
     "fix:electron": "xattr -cr node_modules/electron/dist/Electron.app 2>/dev/null || true && codesign --force --deep --sign - node_modules/electron/dist/Electron.app 2>/dev/null || true",
     "electron:dev": "vite build && electron ."
@@ -38,6 +41,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "electron": "^31.7.7",
+    "electron-builder": "^24.13.3",
     "font-awesome": "^4.7.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^4.0.0",
@@ -46,5 +50,37 @@
   "allowScripts": {
     "electron@31.7.7": true,
     "esbuild@0.21.5": true
+  },
+  "build": {
+    "appId": "com.retriever.app",
+    "productName": "Re-triever",
+    "directories": {
+      "output": "dist_app"
+    },
+    "files": [
+      "dist/**/*",
+      "build/**/*",
+      "src/main/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
+    }
   }
 }

@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod tests {
     use std::fs;
-    use std::path::PathBuf;
 
     #[test]
     fn test_storage_and_cdc_deduplication() {
