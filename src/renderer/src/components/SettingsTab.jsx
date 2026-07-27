@@ -4,8 +4,6 @@ import {
   Trash2, 
   HardDrive, 
   RotateCcw, 
-  Sun, 
-  Moon, 
   ShieldCheck, 
   AlertTriangle, 
   Sparkles,
@@ -13,9 +11,6 @@ import {
 } from 'lucide-react';
 
 export default function SettingsTab({
-  theme,
-  toggleTheme,
-  stats,
   onClearTempMemory,
   onCompactStorage,
   onResetAllData,
@@ -55,149 +50,111 @@ export default function SettingsTab({
     <div className="flex-1 overflow-y-auto space-y-4 pr-1">
       
       {/* 1. GENERAL PREFERENCES CARD */}
-      <div className={`p-4 border rounded-xl space-y-3 ${
-        theme === 'dark' ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-200 shadow-xs'
-      }`}>
-        <div className="flex items-center gap-2 border-b pb-2.5 border-zinc-800/40">
-          <Settings className={`w-4 h-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`} />
-          <h3 className={`text-xs font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
-            App Preferences & Appearance
+      <div className="p-4 bg-white rounded-xl border border-[rgba(224,122,95,0.2)] space-y-3 shadow-xs">
+        <div className="flex items-center gap-2 border-b border-[rgba(224,122,95,0.15)] pb-3">
+          <Settings className="w-4 h-4 text-[#E07A5F]" />
+          <h3 className="text-xs font-bold text-[#2A201A] tracking-wide uppercase">
+            App Preferences & Integrations
           </h3>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pt-1">
           <div>
-            <p className={`text-xs font-semibold ${theme === 'dark' ? 'text-zinc-200' : 'text-zinc-800'}`}>Theme Mode</p>
-            <p className={`text-[11px] ${theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'}`}>Toggle between Dark Mode and Light Mode</p>
+            <p className="text-xs font-semibold text-[#2A201A]">OS Context Menu Shortcut</p>
+            <p className="text-[11px] text-[#786658]">Right-click any folder in macOS Finder or Windows Explorer</p>
           </div>
-          <button
-            onClick={toggleTheme}
-            className={`px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all flex items-center gap-1.5 ${
-              theme === 'dark'
-                ? 'bg-zinc-800 text-zinc-200 border-zinc-700 hover:bg-zinc-700 hover:text-white'
-                : 'bg-zinc-100 text-zinc-800 border-zinc-300 hover:bg-zinc-200 hover:text-black shadow-xs'
-            }`}
-          >
-            {theme === 'dark' ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-          </button>
-        </div>
-
-        <div className="flex items-center justify-between pt-2 border-t border-zinc-800/40">
-          <div>
-            <p className={`text-xs font-semibold ${theme === 'dark' ? 'text-zinc-200' : 'text-zinc-800'}`}>OS Finder / Explorer Context Menu</p>
-            <p className={`text-[11px] ${theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'}`}>Right-click any folder to observe and track versions</p>
-          </div>
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1 ${
-            theme === 'dark' ? 'bg-zinc-800 text-white border-zinc-700' : 'bg-zinc-100 text-zinc-900 border-zinc-300'
-          }`}>
-            <ShieldCheck className="w-3 h-3" /> Enabled
+          <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#2A9D8F]/10 text-[#2A9D8F] border border-[#2A9D8F]/25 flex items-center gap-1">
+            <ShieldCheck className="w-3.5 h-3.5" /> Enabled
           </span>
         </div>
       </div>
 
       {/* 2. STORAGE & MEMORY MANAGEMENT CARD */}
-      <div className={`p-4 border rounded-xl space-y-3 ${
-        theme === 'dark' ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-200 shadow-xs'
-      }`}>
-        <div className="flex items-center gap-2 border-b pb-2.5 border-zinc-800/40">
-          <HardDrive className={`w-4 h-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`} />
-          <h3 className={`text-xs font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
+      <div className="p-4 bg-white rounded-xl border border-[rgba(224,122,95,0.2)] space-y-3 shadow-xs">
+        <div className="flex items-center gap-2 border-b border-[rgba(224,122,95,0.15)] pb-3">
+          <HardDrive className="w-4 h-4 text-[#E07A5F]" />
+          <h3 className="text-xs font-bold text-[#2A201A] tracking-wide uppercase">
             Storage & Memory Maintenance
           </h3>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           {/* Clear Temp Memory Button */}
-          <div className={`p-3 border rounded-lg space-y-2 flex flex-col justify-between ${
-            theme === 'dark' ? 'bg-zinc-950 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-          }`}>
+          <div className="p-3.5 bg-[oklch(0.962_0.059_95.617)] rounded-xl space-y-2 flex flex-col justify-between border border-[rgba(224,122,95,0.2)]">
             <div>
-              <div className={`flex items-center gap-1.5 text-xs font-semibold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
-                <Zap className="w-3.5 h-3.5" /> Clear Temp Memory
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#2A201A]">
+                <Zap className="w-4 h-4 text-[#E07A5F]" /> Clear Temp Memory
               </div>
-              <p className={`text-[10px] mt-1 ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>
+              <p className="text-[11px] text-[#786658] mt-1">
                 Delete all temporary file preview copies extracted to OS temp folder.
               </p>
             </div>
             <button
               disabled={busyAction === 'clear-temp'}
               onClick={handleRunClearTemp}
-              className="w-full py-1.5 bg-black hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-black rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm disabled:opacity-50"
+              className="peach-btn-primary w-full py-2 text-xs flex items-center justify-center gap-1.5 disabled:opacity-50"
             >
-              <Zap className="w-3 h-3" />
+              <Zap className="w-3.5 h-3.5" />
               {busyAction === 'clear-temp' ? 'Clearing...' : 'Clear Temp Files'}
             </button>
           </div>
 
           {/* Defrag & Compact Storage */}
-          <div className={`p-3 border rounded-lg space-y-2 flex flex-col justify-between ${
-            theme === 'dark' ? 'bg-zinc-950 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-          }`}>
+          <div className="p-3.5 bg-[oklch(0.962_0.059_95.617)] rounded-xl space-y-2 flex flex-col justify-between border border-[rgba(224,122,95,0.2)]">
             <div>
-              <div className={`flex items-center gap-1.5 text-xs font-semibold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>
-                <Sparkles className="w-3.5 h-3.5" /> Compact Database
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#2A201A]">
+                <Sparkles className="w-4 h-4 text-[#E07A5F]" /> Compact Database
               </div>
-              <p className={`text-[10px] mt-1 ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>
+              <p className="text-[11px] text-[#786658] mt-1">
                 Defragment SQLite database and purge unreferenced blobs to free space.
               </p>
             </div>
             <button
               disabled={busyAction === 'compact'}
               onClick={handleRunCompact}
-              className={`w-full py-1.5 border rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 disabled:opacity-50 ${
-                theme === 'dark'
-                  ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                  : 'bg-white hover:bg-zinc-100 text-zinc-800 border-zinc-300 shadow-xs'
-              }`}
+              className="peach-btn-secondary w-full py-2 text-xs flex items-center justify-center gap-1.5 disabled:opacity-50"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3.5 h-3.5" />
               {busyAction === 'compact' ? 'Compacting...' : 'Compact Storage'}
             </button>
           </div>
         </div>
       </div>
 
-      {/* 3. DANGER ZONE & UNINSTALL CARD */}
-      <div className={`p-4 border rounded-xl space-y-3 ${
-        theme === 'dark' ? 'bg-zinc-900/90 border-red-500/30' : 'bg-white border-red-200 shadow-xs'
-      }`}>
-        <div className="flex items-center gap-2 border-b pb-2.5 border-red-500/20">
-          <AlertTriangle className="w-4 h-4 text-red-500" />
-          <h3 className={`text-xs font-bold ${theme === 'dark' ? 'text-red-400' : 'text-red-700'}`}>
+      {/* 3. DANGER ZONE & ADMINISTRATIVE RESET */}
+      <div className="p-4 bg-white rounded-xl border border-[#E63946]/30 space-y-3 shadow-xs">
+        <div className="flex items-center gap-2 border-b border-[#E63946]/20 pb-3">
+          <AlertTriangle className="w-4 h-4 text-[#E63946]" />
+          <h3 className="text-xs font-bold text-[#E63946] tracking-wide uppercase">
             Danger Zone & Administrative Reset
           </h3>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {/* Reset All Application Data */}
           <div className="flex items-center justify-between">
             <div>
-              <p className={`text-xs font-semibold ${theme === 'dark' ? 'text-zinc-200' : 'text-zinc-900'}`}>Reset All Storage & Database</p>
-              <p className={`text-[11px] ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>Erase all commits, version blobs, and start fresh with clean slate</p>
+              <p className="text-xs font-semibold text-[#2A201A]">Reset All Storage & Data</p>
+              <p className="text-[11px] text-[#786658]">Erase all commits, version blobs, and start fresh with clean slate</p>
             </div>
             <button
               onClick={() => setResetConfirmModal(true)}
-              className="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm"
+              className="peach-btn-danger px-4 py-2 text-xs flex items-center gap-1.5 shrink-0"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              Reset All Data
+              Erase Everything
             </button>
           </div>
 
           {/* Uninstall Re-triever Integrations */}
-          <div className="flex items-center justify-between pt-2.5 border-t border-red-500/20">
+          <div className="flex items-center justify-between pt-3 border-t border-[#E63946]/20">
             <div>
-              <p className={`text-xs font-semibold ${theme === 'dark' ? 'text-zinc-200' : 'text-zinc-900'}`}>Uninstall Integrations</p>
-              <p className={`text-[11px] ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>De-register context menus, unwatch folders, and prepare for uninstall</p>
+              <p className="text-xs font-semibold text-[#2A201A]">Uninstall Integrations</p>
+              <p className="text-[11px] text-[#786658]">De-register context menus and unwatch all folders</p>
             </div>
             <button
               onClick={() => setUninstallModal(true)}
-              className={`px-3 py-1.5 border rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                theme === 'dark'
-                  ? 'bg-zinc-800 hover:bg-red-950 text-red-400 border-red-500/40'
-                  : 'bg-white hover:bg-red-50 text-red-700 border-red-300 shadow-xs'
-              }`}
+              className="peach-btn-secondary px-4 py-2 text-xs text-[#E63946] hover:bg-[#E63946]/10 border-[#E63946]/30 flex items-center gap-1.5 shrink-0"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Uninstall App
@@ -208,32 +165,26 @@ export default function SettingsTab({
 
       {/* RESET CONFIRMATION MODAL */}
       {resetConfirmModal && (
-        <div className={`fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${
-          theme === 'dark' ? 'bg-zinc-950/85' : 'bg-zinc-900/40'
-        }`}>
-          <div className={`w-full max-w-sm border rounded-2xl p-4 shadow-2xl space-y-3 animate-in zoom-in-95 duration-150 ${
-            theme === 'dark' ? 'bg-zinc-900 border-red-500/40 text-white' : 'bg-white border-red-300 text-zinc-900'
-          }`}>
-            <div className="flex items-center gap-2 text-red-500 font-bold text-xs">
-              <AlertTriangle className="w-4 h-4" />
+        <div className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-4 bg-black/40">
+          <div className="w-full max-w-sm bg-white border border-[#E63946]/40 rounded-2xl p-5 shadow-2xl space-y-4">
+            <div className="flex items-center gap-2 text-[#E63946] font-bold text-sm">
+              <AlertTriangle className="w-5 h-5" />
               <span>Confirm Complete Reset</span>
             </div>
-            <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'}`}>
-              Are you sure you want to delete all version histories, tracked files, and SQLite database data? <span className="font-bold text-red-500">This action cannot be undone.</span>
+            <p className="text-xs text-[#786658] leading-relaxed">
+              Are you sure you want to delete all version histories, tracked files, and SQLite database data? <strong className="text-[#E63946]">This action cannot be undone.</strong>
             </p>
-            <div className="flex items-center justify-end gap-2 pt-2">
+            <div className="flex items-center justify-end gap-2.5 pt-2">
               <button
                 onClick={() => setResetConfirmModal(false)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium ${
-                  theme === 'dark' ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'
-                }`}
+                className="peach-btn-secondary px-4 py-2 text-xs"
               >
                 Cancel
               </button>
               <button
                 disabled={busyAction === 'reset-data'}
                 onClick={handleConfirmReset}
-                className="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold shadow-md shadow-red-600/20 disabled:opacity-50"
+                className="peach-btn-danger px-4 py-2 text-xs disabled:opacity-50"
               >
                 {busyAction === 'reset-data' ? 'Resetting...' : 'Yes, Erase Everything'}
               </button>
@@ -244,32 +195,26 @@ export default function SettingsTab({
 
       {/* UNINSTALL CONFIRMATION MODAL */}
       {uninstallModal && (
-        <div className={`fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${
-          theme === 'dark' ? 'bg-zinc-950/85' : 'bg-zinc-900/40'
-        }`}>
-          <div className={`w-full max-w-sm border rounded-2xl p-4 shadow-2xl space-y-3 animate-in zoom-in-95 duration-150 ${
-            theme === 'dark' ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-zinc-200 text-zinc-900'
-          }`}>
-            <div className={`flex items-center gap-2 font-bold text-xs ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-              <Trash2 className="w-4 h-4" />
+        <div className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-4 bg-black/40">
+          <div className="w-full max-w-sm bg-white border border-[rgba(224,122,95,0.3)] rounded-2xl p-5 shadow-2xl space-y-4">
+            <div className="flex items-center gap-2 text-[#2A201A] font-bold text-sm">
+              <Trash2 className="w-5 h-5 text-[#E07A5F]" />
               <span>Uninstall Re-triever Integrations</span>
             </div>
-            <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'}`}>
+            <p className="text-xs text-[#786658] leading-relaxed">
               This will unregister macOS Finder context menu shortcuts, stop watching all folders, and clear temporary preview files.
             </p>
-            <div className="flex items-center justify-end gap-2 pt-2">
+            <div className="flex items-center justify-end gap-2.5 pt-2">
               <button
                 onClick={() => setUninstallModal(false)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium ${
-                  theme === 'dark' ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'
-                }`}
+                className="peach-btn-secondary px-4 py-2 text-xs"
               >
                 Cancel
               </button>
               <button
                 disabled={busyAction === 'uninstall'}
                 onClick={handleConfirmUninstall}
-                className="px-3 py-1.5 bg-black hover:bg-zinc-800 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black rounded-lg text-xs font-bold shadow-md disabled:opacity-50"
+                className="peach-btn-primary px-4 py-2 text-xs disabled:opacity-50"
               >
                 {busyAction === 'uninstall' ? 'Uninstalling...' : 'Uninstall Integrations'}
               </button>

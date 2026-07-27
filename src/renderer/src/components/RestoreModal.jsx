@@ -3,7 +3,6 @@ import { RotateCcw, FolderPlus } from 'lucide-react';
 import { formatBytes, formatTimeAgo } from '../utils/diffUtils';
 
 export default function RestoreModal({
-  theme,
   selectedCommit,
   restoring,
   onClose,
@@ -12,75 +11,57 @@ export default function RestoreModal({
   if (!selectedCommit) return null;
 
   return (
-    <div className={`fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center p-4 ${
-      theme === 'dark' ? 'bg-zinc-950/85' : 'bg-zinc-900/40'
-    }`}>
-      <div className={`w-full max-w-sm border rounded-2xl p-4 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 ${
-        theme === 'dark' ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-zinc-200 text-zinc-900'
-      }`}>
-        <div className={`flex items-center justify-between border-b pb-3 ${
-          theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200'
-        }`}>
+    <div className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-4 bg-black/80">
+      <div className="w-full max-w-sm bg-[#28201D] border border-[#382D28] rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 text-[#FAF0E6]">
+        <div className="flex items-center justify-between border-b border-[#382D28] pb-3">
           <div className="flex items-center gap-2">
-            <RotateCcw className={`w-4 h-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`} />
-            <h3 className={`text-xs font-bold ${theme === 'dark' ? 'text-white' : 'text-zinc-900'}`}>Restore & Merge File Version</h3>
+            <RotateCcw className="w-4 h-4 text-[#E07A5F]" />
+            <h3 className="text-sm font-bold text-[#FAF0E6]">Restore File Version</h3>
           </div>
           <button 
             onClick={onClose}
-            className={`text-xs font-bold px-1.5 py-0.5 rounded ${
-              theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'
-            }`}
+            className="w-7 h-7 rounded-full bg-[#342B28] hover:bg-[#423733] text-[#9C8E87] hover:text-[#FAF0E6] flex items-center justify-center text-xs font-bold transition-colors shrink-0"
           >
             ✕
           </button>
         </div>
 
-        <div className={`p-3 rounded-xl border space-y-2 ${
-          theme === 'dark' ? 'bg-zinc-950 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-        }`}>
-          <div className={`text-xs font-semibold truncate ${theme === 'dark' ? 'text-zinc-200' : 'text-zinc-900'}`}>
+        <div className="p-3.5 bg-[#1E1715] rounded-xl border border-[#382D28] space-y-2">
+          <div className="text-xs font-bold text-[#FAF0E6] truncate">
             {selectedCommit.file_path.split('/').pop()}
           </div>
-          <div className={`text-[11px] font-mono truncate ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`}>
+          <div className="text-[11px] font-mono text-[#9C8E87] truncate">
             {selectedCommit.file_path}
           </div>
-          <div className={`flex items-center justify-between text-[10px] pt-1 border-t ${
-            theme === 'dark' ? 'text-zinc-400 border-zinc-800' : 'text-zinc-500 border-zinc-200'
-          }`}>
-            <span>Timestamp: {formatTimeAgo(selectedCommit.timestamp)}</span>
-            <span>Size: {formatBytes(selectedCommit.file_size)}</span>
+          <div className="flex items-center justify-between text-[11px] text-[#9C8E87] pt-2 border-t border-[#382D28]">
+            <span>Saved {formatTimeAgo(selectedCommit.timestamp)}</span>
+            <span>{formatBytes(selectedCommit.file_size)}</span>
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <button
             disabled={restoring}
             onClick={() => onRestoreCommit(selectedCommit, selectedCommit.file_path)}
-            className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="peach-btn-primary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-4 h-4" />
             {restoring ? 'Restoring File...' : '⚡ Overwrite Current File Directly'}
           </button>
 
           <button
             disabled={restoring}
             onClick={() => onRestoreCommit(selectedCommit, undefined)}
-            className={`w-full py-2 border rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 disabled:opacity-50 ${
-              theme === 'dark'
-                ? 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-zinc-700'
-                : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border-zinc-300 shadow-xs'
-            }`}
+            className="peach-btn-secondary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            <FolderPlus className={`w-3.5 h-3.5 ${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'}`} />
+            <FolderPlus className="w-4 h-4 text-[#9C8E87]" />
             📁 Export / Save as Custom Copy...
           </button>
 
           <button
             disabled={restoring}
             onClick={onClose}
-            className={`w-full py-1.5 rounded-xl text-xs font-medium transition-all ${
-              theme === 'dark' ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-400' : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-600'
-            }`}
+            className="w-full py-2 rounded-full text-xs font-semibold text-[#9C8E87] hover:text-[#FAF0E6] transition-colors"
           >
             Cancel
           </button>

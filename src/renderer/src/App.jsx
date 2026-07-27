@@ -422,9 +422,7 @@ export default function App() {
   };
 
   return (
-    <div className={`w-full h-screen flex flex-col justify-between overflow-hidden border rounded-lg shadow-2xl transition-colors duration-200 ${
-      theme === 'dark' ? 'bg-black border-zinc-800 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
-    }`}>
+    <div className="w-full h-screen flex flex-col justify-between overflow-hidden bg-[oklch(0.962_0.059_95.617)] text-[#2A201A] relative">
       
       {/* 1. HEADER BAR */}
       <Header
@@ -438,23 +436,19 @@ export default function App() {
 
       {/* 2. STORAGE STATS METRICS STRIP */}
       <MetricsStrip
-        theme={theme}
         stats={stats}
         watchedFolderCount={watchedFolders.length}
       />
 
       {/* 3. NAVIGATION TABS */}
       <NavTabs
-        theme={theme}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         folderCount={watchedFolders.length}
       />
 
       {/* 4. MAIN TAB CONTENT AREA */}
-      <main className={`flex-1 overflow-hidden p-4 flex flex-col space-y-3 ${
-        theme === 'dark' ? 'bg-black' : 'bg-slate-50'
-      }`}>
+      <main className="flex-1 overflow-hidden p-4 flex flex-col space-y-3 bg-[oklch(0.962_0.059_95.617)]">
         <Toast toast={toast} />
 
         {activeTab === 'activity' && (

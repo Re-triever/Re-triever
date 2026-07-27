@@ -1,53 +1,55 @@
 import React from 'react';
 import { History, FileCode, Folder, Settings } from 'lucide-react';
 
-export default function NavTabs({ theme, activeTab, setActiveTab, folderCount }) {
+export default function NavTabs({ activeTab, setActiveTab, folderCount }) {
   return (
-    <div className={`px-4 pt-2.5 flex border-b space-x-1 ${
-      theme === 'dark' ? 'bg-black border-zinc-800' : 'bg-zinc-100 border-zinc-200'
-    }`}>
+    <div className="px-5 pt-3 pb-1 bg-[oklch(0.962_0.059_95.617)] flex border-b border-[#EEDCC8] space-x-2">
+      {/* Activity Feed Tab */}
       <button
         onClick={() => setActiveTab('activity')}
-        className={`flex-1 py-1.5 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
+        className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'activity'
-            ? (theme === 'dark' ? 'bg-black text-white border-zinc-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-zinc-900 border-zinc-300 border-b-transparent shadow-sm font-semibold')
-            : (theme === 'dark' ? 'text-zinc-400 border-transparent hover:text-zinc-200 hover:bg-zinc-900' : 'text-zinc-600 border-transparent hover:text-zinc-900 hover:bg-zinc-200/60')
+            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
+            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
         }`}
       >
         <History className="w-3.5 h-3.5" />
         Activity Feed
       </button>
 
+      {/* Tracked Files & Diffs Tab */}
       <button
         onClick={() => setActiveTab('history')}
-        className={`flex-1 py-1.5 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
+        className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'history'
-            ? (theme === 'dark' ? 'bg-black text-white border-zinc-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-zinc-900 border-zinc-300 border-b-transparent shadow-sm font-semibold')
-            : (theme === 'dark' ? 'text-zinc-400 border-transparent hover:text-zinc-200 hover:bg-zinc-900' : 'text-zinc-600 border-transparent hover:text-zinc-900 hover:bg-zinc-200/60')
+            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
+            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
         }`}
       >
-        <FileCode className={`w-3.5 h-3.5 ${theme === 'dark' ? 'text-white' : 'text-black'}`} />
-        File History & Diffs
+        <FileCode className="w-3.5 h-3.5" />
+        Tracked Files & Diffs
       </button>
 
+      {/* Folders Tab */}
       <button
         onClick={() => setActiveTab('folders')}
-        className={`flex-1 py-1.5 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
+        className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'folders'
-            ? (theme === 'dark' ? 'bg-black text-white border-zinc-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-zinc-900 border-zinc-300 border-b-transparent shadow-sm font-semibold')
-            : (theme === 'dark' ? 'text-zinc-400 border-transparent hover:text-zinc-200 hover:bg-zinc-900' : 'text-zinc-600 border-transparent hover:text-zinc-900 hover:bg-zinc-200/60')
+            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
+            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
         }`}
       >
         <Folder className="w-3.5 h-3.5" />
-        Folders ({folderCount})
+        Monitored Folders ({folderCount})
       </button>
 
+      {/* Settings Tab */}
       <button
         onClick={() => setActiveTab('settings')}
-        className={`py-1.5 px-3 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
+        className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'settings'
-            ? (theme === 'dark' ? 'bg-black text-white border-zinc-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-zinc-900 border-zinc-300 border-b-transparent shadow-sm font-semibold')
-            : (theme === 'dark' ? 'text-zinc-400 border-transparent hover:text-zinc-200 hover:bg-zinc-900' : 'text-zinc-600 border-transparent hover:text-zinc-900 hover:bg-zinc-200/60')
+            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
+            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
         }`}
         title="Settings & Preferences"
       >
