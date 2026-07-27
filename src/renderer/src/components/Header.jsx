@@ -25,7 +25,7 @@ export default function Header({
           }`}>
             Re-triever
             <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
-              CDC v1.0
+              v1.0
             </span>
           </h1>
           <p className={`text-[11px] font-medium ${theme === 'dark' ? 'text-slate-400' : 'text-slate-500'}`}>Background Version Control</p>

@@ -1,4 +1,4 @@
-const { app, ipcMain, dialog } = require('electron');
+const { app, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const FileWatcherService = require('./watcher');
@@ -539,7 +539,126 @@ app.whenReady().then(() => {
     const window = trayManager ? trayManager.popoverWindow : null;
     return window ? (window.isMaximized() || window.isFullScreen()) : false;
   });
+
+  ipcMain.handle('open-temp-file-version', async (event, { commitId, filePath, saveNumber }) => {
+    try {
+      const ext = path.extname(filePath);
+      const baseName = path.basename(filePath, ext);
+      const tempDir = app.getPath('temp');
+
+      const safeBaseName = baseName.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const tempFileName = `${safeBaseName}_Save#${saveNumber || 'ver'}_${Date.now()}${ext}`;
+      const tempFilePath = path.join(tempDir, tempFileName);
+
+      const restored = restoreFileVersionCore(commitId, tempFilePath);
+      if (!restored) return { success: false, error: 'Failed to extract temp version file' };
+
+      activeTempFiles.add(tempFilePath);
+      await shell.openPath(tempFilePath);
+
+      return { success: true, tempPath: tempFilePath };
+    } catch (err) {
+      console.error('Error opening temp version:', err);
+      return { success: false, error: err.message };
+    }
+  });
+
+  ipcMain.handle('clear-temp-memory', async () => {
+    return clearTempMemoryCore();
+  });
+
+  ipcMain.handle('compact-storage', async () => {
+    try {
+      // Return updated storage stats
+      return { success: true, stats: getStorageStatsCore() };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  });
+
+  ipcMain.handle('reset-all-data', async () => {
+    return resetAllDataCore();
+  });
+
+  ipcMain.handle('uninstall-app-integration', async () => {
+    return uninstallIntegrationCore();
+  });
 });
+
+function clearTempMemoryCore() {
+  const tempDir = app.getPath('temp');
+  let freedBytes = 0;
+  let count = 0;
+  try {
+    const files = fs.readdirSync(tempDir);
+    for (const f of files) {
+      if (f.includes('Save#') || f.startsWith('Re-triever') || activeTempFiles.has(path.join(tempDir, f))) {
+        const p = path.join(tempDir, f);
+        try {
+          const stat = fs.statSync(p);
+          freedBytes += stat.size;
+          fs.unlinkSync(p);
+          count++;
+          activeTempFiles.delete(p);
+        } catch (e) {}
+      }
+    }
+  } catch (e) {
+    console.error('Error clearing temp memory:', e);
+  }
+  return { success: true, count, freedBytes };
+}
+
+function resetAllDataCore() {
+  try {
+    if (watcherService) {
+      watcherService.unwatchAll();
+    }
+    const home = app.getPath('home');
+    const retrieverDir = path.join(home, '.re-triever');
+    if (fs.existsSync(retrieverDir)) {
+      fs.rmSync(retrieverDir, { recursive: true, force: true });
+    }
+    fs.mkdirSync(retrieverDir, { recursive: true });
+    return { success: true };
+  } catch (e) {
+    console.error('Error resetting all data:', e);
+    return { success: false, error: e.message };
+  }
+}
+
+function uninstallIntegrationCore() {
+  try {
+    if (contextMenuManager) {
+      contextMenuManager.unregister();
+    }
+    if (watcherService) {
+      watcherService.unwatchAll();
+    }
+    return { success: true };
+  } catch (e) {
+    return { success: false, error: e.message };
+  }
+}
+
+const activeTempFiles = new Set();
+
+function cleanupTempFiles() {
+  for (const file of activeTempFiles) {
+    try {
+      if (fs.existsSync(file)) {
+        fs.unlinkSync(file);
+        console.log(`[Temp Cleanup] Deleted preview temp file: ${file}`);
+      }
+    } catch (e) {
+      console.error(`[Temp Cleanup] Failed to delete ${file}:`, e);
+    }
+  }
+  activeTempFiles.clear();
+}
+
+app.on('before-quit', cleanupTempFiles);
+app.on('will-quit', cleanupTempFiles);
 
 app.on('open-url', (event, url) => {
   event.preventDefault();

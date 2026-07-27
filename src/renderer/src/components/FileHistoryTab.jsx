@@ -9,7 +9,8 @@ import {
   RotateCcw, 
   Clock, 
   Eye, 
-  Sparkles 
+  Sparkles,
+  ExternalLink
 } from 'lucide-react';
 import { formatBytes, formatTimeAgo, getFileTypeBadge, getRestoredInfo } from '../utils/diffUtils';
 
@@ -29,6 +30,7 @@ export default function FileHistoryTab({
   onCompareAnyTwoVersions,
   onOpenDiffLog,
   onSelectCommitToRestore,
+  onOpenTempVersion,
   onBackToActivity
 }) {
   const filteredTrackedFiles = trackedFiles.filter(f => 
@@ -306,6 +308,19 @@ export default function FileHistoryTab({
                           </div>
 
                           <div className="flex items-center gap-1.5 shrink-0">
+                            <button
+                              onClick={() => onOpenTempVersion(commit, fileHistory.length - idx)}
+                              className={`px-2 py-1 text-[11px] font-medium border rounded-lg transition-all flex items-center gap-1 shrink-0 ${
+                                theme === 'dark'
+                                  ? 'bg-blue-950/60 hover:bg-blue-600 text-blue-300 hover:text-white border-blue-500/30 hover:border-blue-400'
+                                  : 'bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white border-blue-200 shadow-xs'
+                              }`}
+                              title="Open temporary preview copy of this save version in default application (Auto-clears on app exit)"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              Open Version
+                            </button>
+
                             <button
                               onClick={() => onOpenDiffLog(commit, idx)}
                               className={`px-2 py-1 text-[11px] font-semibold border rounded-lg transition-all flex items-center gap-1 shadow-xs ${

@@ -1,5 +1,5 @@
 import React from 'react';
-import { History, FileCode, Folder } from 'lucide-react';
+import { History, FileCode, Folder, Settings } from 'lucide-react';
 
 export default function NavTabs({ theme, activeTab, setActiveTab, folderCount }) {
   return (
@@ -40,6 +40,19 @@ export default function NavTabs({ theme, activeTab, setActiveTab, folderCount })
       >
         <Folder className="w-3.5 h-3.5" />
         Folders ({folderCount})
+      </button>
+
+      <button
+        onClick={() => setActiveTab('settings')}
+        className={`py-1.5 px-3 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
+          activeTab === 'settings'
+            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm font-semibold')
+            : (theme === 'dark' ? 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-slate-900/40' : 'text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-200/60')
+        }`}
+        title="Settings & Preferences"
+      >
+        <Settings className="w-3.5 h-3.5" />
+        Settings
       </button>
     </div>
   );

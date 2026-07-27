@@ -5,6 +5,7 @@ import NavTabs from './components/NavTabs';
 import ActivityFeed from './components/ActivityFeed';
 import FileHistoryTab from './components/FileHistoryTab';
 import FoldersTab from './components/FoldersTab';
+import SettingsTab from './components/SettingsTab';
 import DiffViewerModal from './components/DiffViewerModal';
 import RestoreModal from './components/RestoreModal';
 import Toast from './components/Toast';
@@ -340,6 +341,86 @@ export default function App() {
     }
   };
 
+  const handleOpenTempVersion = async (commit, saveNumber) => {
+    try {
+      showToast(`Opening temporary preview for Save #${saveNumber}...`, 'info');
+      const res = await ipcRenderer.invoke('open-temp-file-version', {
+        commitId: commit.id,
+        filePath: commit.file_path,
+        saveNumber
+      });
+      if (res.success) {
+        showToast(`Opened Save #${saveNumber} temp copy (Auto-clears on app exit)`, 'success');
+      } else {
+        showToast(`Failed to open temp version: ${res.error || 'Unknown error'}`, 'error');
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error opening temp version file', 'error');
+    }
+  };
+
+  const handleClearTempMemory = async () => {
+    try {
+      const res = await ipcRenderer.invoke('clear-temp-memory');
+      if (res.success) {
+        showToast(`Cleared ${res.count || 0} temporary preview files (${formatBytes(res.freedBytes || 0)})`, 'success');
+      } else {
+        showToast('Failed to clear temp memory', 'error');
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error clearing temp memory', 'error');
+    }
+  };
+
+  const handleCompactStorage = async () => {
+    try {
+      const res = await ipcRenderer.invoke('compact-storage');
+      if (res.success) {
+        if (res.stats) setStats(res.stats);
+        showToast('Storage successfully compacted & database defragmented', 'success');
+      } else {
+        showToast('Failed to compact storage', 'error');
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error compacting storage', 'error');
+    }
+  };
+
+  const handleResetAllData = async () => {
+    try {
+      const res = await ipcRenderer.invoke('reset-all-data');
+      if (res.success) {
+        showToast('Successfully erased all data and reset to factory defaults', 'success');
+        setSelectedFile(null);
+        setFileHistory([]);
+        loadData();
+      } else {
+        showToast(`Failed to reset data: ${res.error}`, 'error');
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error resetting data', 'error');
+    }
+  };
+
+  const handleUninstallIntegration = async () => {
+    try {
+      const res = await ipcRenderer.invoke('uninstall-app-integration');
+      if (res.success) {
+        showToast('Context menus de-registered and folder watching paused', 'info');
+        loadData();
+      } else {
+        showToast(`Uninstall failed: ${res.error}`, 'error');
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error de-registering app integrations', 'error');
+    }
+  };
+
   return (
     <div className={`w-full h-screen flex flex-col justify-between overflow-hidden border rounded-lg shadow-2xl transition-colors duration-200 ${
       theme === 'dark' ? 'bg-slate-950 border-slate-800/80 text-white' : 'bg-slate-50 border-slate-300 text-slate-900'
@@ -405,6 +486,7 @@ export default function App() {
             onCompareAnyTwoVersions={handleCompareAnyTwoVersions}
             onOpenDiffLog={handleOpenDiffLog}
             onSelectCommitToRestore={(commit) => setSelectedCommit(commit)}
+            onOpenTempVersion={handleOpenTempVersion}
             onBackToActivity={() => setActiveTab('activity')}
           />
         )}
@@ -415,6 +497,18 @@ export default function App() {
             watchedFolders={watchedFolders}
             onAddFolderDialog={handleAddFolderDialog}
             onRemoveFolder={handleRemoveFolder}
+          />
+        )}
+
+        {activeTab === 'settings' && (
+          <SettingsTab
+            theme={theme}
+            toggleTheme={toggleTheme}
+            stats={stats}
+            onClearTempMemory={handleClearTempMemory}
+            onCompactStorage={handleCompactStorage}
+            onResetAllData={handleResetAllData}
+            onUninstallIntegration={handleUninstallIntegration}
           />
         )}
       </main>
