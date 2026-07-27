@@ -28,7 +28,8 @@ export default function FileHistoryTab({
   setCompareTargetId,
   onCompareAnyTwoVersions,
   onOpenDiffLog,
-  onSelectCommitToRestore
+  onSelectCommitToRestore,
+  onBackToActivity
 }) {
   const filteredTrackedFiles = trackedFiles.filter(f => 
     f.fileName.toLowerCase().includes(fileSearchQuery.toLowerCase()) ||
@@ -123,12 +124,18 @@ export default function FileHistoryTab({
             }`}>
               <div className="min-w-0 pr-2">
                 <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => setSelectedFile(null)} 
-                    className={`md:hidden p-1 ${theme === 'dark' ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                  </button>
+                  {onBackToActivity && (
+                    <button 
+                      onClick={onBackToActivity} 
+                      className={`p-1.5 rounded-lg border text-xs font-medium transition-all flex items-center gap-1 ${
+                        theme === 'dark' ? 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-750' : 'bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200'
+                      }`}
+                      title="Back to Activity Feed"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Activity Feed</span>
+                    </button>
+                  )}
                   <h2 className={`text-xs font-bold truncate flex items-center gap-2 ${
                     theme === 'dark' ? 'text-white' : 'text-slate-900'
                   }`}>

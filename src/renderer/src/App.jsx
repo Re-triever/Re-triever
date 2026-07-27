@@ -405,6 +405,7 @@ export default function App() {
             onCompareAnyTwoVersions={handleCompareAnyTwoVersions}
             onOpenDiffLog={handleOpenDiffLog}
             onSelectCommitToRestore={(commit) => setSelectedCommit(commit)}
+            onBackToActivity={() => setActiveTab('activity')}
           />
         )}
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Clock, Sparkles, Eye, RotateCcw } from 'lucide-react';
+import { Clock, Sparkles, Eye } from 'lucide-react';
 import { formatBytes, formatTimeAgo, getFileTypeBadge } from '../utils/diffUtils';
 
 export default function ActivityFeed({
   theme,
   commits,
-  onViewFileLog,
-  onSelectCommitToRestore
+  onViewFileLog
 }) {
   return (
     <div className="flex-1 overflow-y-auto space-y-2.5">
@@ -75,27 +74,15 @@ export default function ActivityFeed({
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => onViewFileLog(commit.file_path, fileName)}
-                  className={`px-2 py-1 text-[11px] font-medium rounded-lg border transition-all flex items-center gap-1 shrink-0 ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all flex items-center gap-1.5 shrink-0 shadow-xs ${
                     theme === 'dark'
-                      ? 'bg-slate-800/80 hover:bg-slate-750 text-emerald-400 hover:text-emerald-300 border-slate-700/60'
-                      : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200'
+                      ? 'bg-emerald-950/80 hover:bg-emerald-600 text-emerald-400 hover:text-white border-emerald-500/40 hover:border-emerald-400'
+                      : 'bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white border-emerald-200'
                   }`}
-                  title="View File Log & Timeline"
+                  title="View File Log & Visual Timeline"
                 >
-                  <Eye className="w-3 h-3" />
-                  Log
-                </button>
-
-                <button
-                  onClick={() => onSelectCommitToRestore(commit)}
-                  className={`px-2.5 py-1 text-[11px] font-medium rounded-lg border transition-all flex items-center gap-1 shrink-0 ${
-                    theme === 'dark'
-                      ? 'bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white border-slate-700/80 hover:border-emerald-500'
-                      : 'bg-slate-100 hover:bg-slate-800 text-slate-700 hover:text-white border-slate-300 hover:border-slate-800'
-                  }`}
-                >
-                  <RotateCcw className="w-3 h-3" />
-                  Restore
+                  <Eye className="w-3.5 h-3.5" />
+                  View History & Diffs
                 </button>
               </div>
             </div>

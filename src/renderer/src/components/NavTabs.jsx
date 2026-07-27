@@ -10,7 +10,7 @@ export default function NavTabs({ theme, activeTab, setActiveTab, folderCount })
         onClick={() => setActiveTab('activity')}
         className={`flex-1 py-1.5 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
           activeTab === 'activity'
-            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm')
+            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm font-semibold')
             : (theme === 'dark' ? 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-slate-900/40' : 'text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-200/60')
         }`}
       >
@@ -22,7 +22,7 @@ export default function NavTabs({ theme, activeTab, setActiveTab, folderCount })
         onClick={() => setActiveTab('history')}
         className={`flex-1 py-1.5 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
           activeTab === 'history'
-            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm')
+            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm font-semibold')
             : (theme === 'dark' ? 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-slate-900/40' : 'text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-200/60')
         }`}
       >
@@ -34,7 +34,7 @@ export default function NavTabs({ theme, activeTab, setActiveTab, folderCount })
         onClick={() => setActiveTab('folders')}
         className={`flex-1 py-1.5 text-xs font-medium rounded-t-md border-t border-x transition-all flex items-center justify-center gap-1.5 ${
           activeTab === 'folders'
-            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm')
+            ? (theme === 'dark' ? 'bg-slate-900 text-white border-slate-800 border-b-transparent shadow-sm font-semibold' : 'bg-white text-slate-900 border-slate-300 border-b-transparent shadow-sm font-semibold')
             : (theme === 'dark' ? 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-slate-900/40' : 'text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-200/60')
         }`}
       >
