@@ -111,6 +111,26 @@ npm run electron:dev
 
 ---
 
+## 🛡️ macOS Gatekeeper & Windows SmartScreen Notice
+
+> [!IMPORTANT]
+> Because **<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is an open-source community project built on GitHub Actions without expensive commercial developer certificates, **macOS Gatekeeper** and **Windows SmartScreen** may display an *"Unidentified Developer"* or *"Unrecognized App"* warning on first launch. **This is a standard false positive.**
+
+### 🍎 On macOS:
+1. **Control-Click (or Right-Click)** `Re:triever.app` in Finder and select **Open**.
+2. Click **Open** on the security prompt (or go to **System Settings ➔ Privacy & Security** and click **Open Anyway**).
+3. Alternatively, clear quarantine via Terminal:
+   ```bash
+   xattr -cr /Applications/Re:triever.app
+   ```
+
+### 🪟 On Windows:
+1. Double-click `Re-triever-Setup-1.0.0.exe`.
+2. When the blue *Windows protected your PC* screen appears, click **More info**.
+3. Click **Run anyway**.
+
+---
+
 ## 🎯 How to Use <span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> in 3 Easy Steps
 
 1. **Watch a Folder**: Right-click any folder on your computer and click **"Observe with Re:triever"**.
