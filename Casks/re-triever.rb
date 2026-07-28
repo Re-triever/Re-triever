@@ -12,7 +12,7 @@ cask "re-triever" do
     strategy :github_latest
   end
 
-  app "Re-triever.app", target: "Re:triever.app"
+  app "Retriever.app", target: "Re:triever.app"
 
   zap trash: [
     "~/.re-triever",
