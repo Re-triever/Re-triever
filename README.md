@@ -17,11 +17,15 @@
   <br />
 
   <p align="center">
+    <a href="https://re-triever.github.io/Re-triever/"><img src="https://img.shields.io/badge/Live%20Website-re--triever.github.io%2FRe--triever-FF6F1E?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Website" /></a>
+  </p>
+
+  <p align="center">
     <a href="#-download--installation"><img src="https://img.shields.io/badge/macOS-Supported-brightgreen?logo=apple&style=for-the-badge&logoColor=white" alt="macOS Support" /></a>
     &nbsp;
     <a href="#-download--installation"><img src="https://img.shields.io/badge/Windows-10%20%2F%2011-blue?logo=windows&style=for-the-badge&logoColor=white" alt="Windows Support" /></a>
     &nbsp;
-    <a href="#-100-free--private"><img src="https://img.shields.io/badge/100%25-Free%20%26%20Private-orange?style=for-the-badge" alt="100% Free" /></a>
+    <a href="https://re-triever.github.io/Re-triever/"><img src="https://img.shields.io/badge/100%25-Free%20%26%20Private-orange?style=for-the-badge" alt="100% Free" /></a>
     &nbsp;
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License" /></a>
   </p>
