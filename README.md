@@ -2,7 +2,7 @@
 
   <br />
   <br />
-  <img src="src/renderer/src/assets/app_icon.png" width="440" height="440" alt="Re:triever Icon" style="border-radius: 44px; box-shadow: 0 16px 48px rgba(255, 111, 29, 0.4); margin-bottom: 28px;" />
+  <img src="src/renderer/src/assets/app_icon.png" width="240" height="240" alt="Re:triever Icon" style="margin-bottom: 24px;" />
   <h1 align="center"><font color="#ff6f1d">Re</font><font color="#343636">:triever</font></h1>
 
   <br />
