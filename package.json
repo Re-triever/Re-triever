@@ -74,7 +74,7 @@
       "package.json"
     ],
     "mac": {
-      "identity": null,
+      "identity": "-",
       "artifactName": "Re-triever-${version}-${arch}.${ext}",
       "icon": "src/renderer/src/assets/app_icon.png",
       "target": [

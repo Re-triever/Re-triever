@@ -111,21 +111,23 @@ npm run electron:dev
 
 ---
 
-## 🛡️ First-Time Launch Guide (macOS & Windows)
+## 🛡️ macOS Security & First-Time Launch Guide
 
 > [!NOTE]
-> When launching **<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** for the first time, macOS Gatekeeper and Windows Defender SmartScreen verify newly downloaded software. Below are the standard operating system steps to complete first-time launch approval.
+> **Ad-Hoc Code Signing**: All **<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** macOS builds are compiled with Ad-Hoc Code Signing (`codesign --sign -`) to preserve bundle integrity.
 
-### 🍎 On macOS:
+### 1. Removing the Web Quarantine Flag (The `xattr` Command)
+To clear the web download attribute in 1 step, open **Terminal** and run:
+```bash
+sudo xattr -rd com.apple.quarantine /Applications/Re:triever.app
+```
+
+### 2. Launching via macOS Finder:
 1. **Right-Click (or Control-Click)** `Re:triever.app` in Finder and select **Open**.
 2. Click **Open** on the system prompt.
 3. **Alternatively via System Settings**: Navigate to **System Settings ➔ Privacy & Security**, scroll down to **Security**, and click **Open Anyway**.
-4. **Alternatively via Terminal**:
-   ```bash
-   sudo xattr -rd com.apple.quarantine /Applications/Re:triever.app
-   ```
 
-### 🪟 On Windows:
+### 🪟 First-Time Launch on Windows:
 1. Open `Re-triever-Setup-1.0.0.exe`.
 2. On the Windows SmartScreen dialog, click **More info**.
 3. Click **Run anyway**.
