@@ -55,6 +55,13 @@
     "appId": "com.retriever.app",
     "productName": "Re:triever",
     "icon": "src/renderer/src/assets/app_icon.png",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Re-triever",
+        "repo": "Re-triever"
+      }
+    ],
     "directories": {
       "output": "dist_app"
     },
