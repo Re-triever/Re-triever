@@ -90,9 +90,10 @@ Your files are your business. <span style="color: #ff6f1d;">Re</span><span style
 ## 📥 Download & Installation
 
 ### Option 1: macOS Homebrew Cask (Recommended for macOS)
-Install **Re:triever** on macOS via Homebrew (automatically clears Gatekeeper quarantine):
+Install **Re:triever** on macOS via Homebrew (automatically bypasses Gatekeeper quarantine):
 ```bash
-brew install --cask https://raw.githubusercontent.com/Re-triever/Re-triever/main/Casks/re-triever.rb
+brew tap Re-triever/re-triever https://github.com/Re-triever/Re-triever.git
+brew install --cask re-triever
 ```
 
 ### Option 2: Download Ready-to-Run Installers
