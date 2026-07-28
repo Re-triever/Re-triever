@@ -65,6 +65,7 @@
       "package.json"
     ],
     "mac": {
+      "artifactName": "Re-triever-${version}-${arch}.${ext}",
       "icon": "src/renderer/src/assets/app_icon.png",
       "target": [
         "dmg",
@@ -73,6 +74,7 @@
       "category": "public.app-category.utilities"
     },
     "win": {
+      "artifactName": "Re-triever-Setup-${version}.${ext}",
       "icon": "src/renderer/src/assets/app_icon.png",
       "target": [
         "nsis"
