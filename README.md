@@ -5,7 +5,7 @@
   <img src="src/renderer/src/assets/app_icon.png" width="220" height="220" alt="Re:triever Icon" style="border-radius: 44px; box-shadow: 0 16px 48px rgba(255, 111, 29, 0.4); margin-bottom: 28px;" />
   <br />
 
-  # <span style="font-size: 2.8em; font-weight: 800; tracking-tight: true;"><span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span></span>
+  <h1 align="center"><font color="#ff6f1d">Re</font><font color="#343636">:triever</font></h1>
 
   <br />
 
