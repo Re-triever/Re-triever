@@ -23,7 +23,7 @@
     "rust"
   ],
   "author": "",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "@napi-rs/cli": "^2.18.4",
     "chokidar": "^3.6.0",

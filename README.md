@@ -27,7 +27,7 @@
     &nbsp;
     <a href="https://re-triever.github.io/Re-triever/"><img src="https://img.shields.io/badge/100%25-Free%20%26%20Private-orange?style=for-the-badge" alt="100% Free" /></a>
     &nbsp;
-    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License" /></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge" alt="License: GPLv3" /></a>
   </p>
 
   ---
@@ -121,7 +121,7 @@ npm run electron:dev
 
 ## 📄 License
 
-**<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is open-source software released under the **MIT License**. Free to use for personal, commercial, and creative projects forever.
+**<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is free, open-source software released under the **[GNU General Public License v3.0 (GPLv3)](LICENSE)**. Everyone is free to use, share, and improve it under strong copyleft protection.
 
 <div align="center">
 
