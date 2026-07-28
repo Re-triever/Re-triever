@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Title & Meta Tags -->
+  <title>Re:triever — Free Automatic Version Control for macOS & Windows</title>
+  <meta name="title" content="Re:triever — Free Automatic Version Control for macOS & Windows" />
+  <meta name="description" content="Re:triever is a free, zero-setup background version control and instant file backup utility for macOS and Windows. Never lose a save or overwrite a draft again." />
+  <meta name="keywords" content="version control, file backup, macos version control, windows version control, automatic backup, local backup, time travel files, diff viewer, file restore" />
+  <meta name="author" content="Re:triever Team" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://re-triever.github.io/Re-triever/" />
+  
+  <!-- Favicons & App Icons -->
+  <link rel="icon" type="image/png" href="app_icon.png" />
+  <link rel="apple-touch-icon" href="app_icon.png" />
+  
+  <!-- Open Graph / Facebook / Discord / LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://re-triever.github.io/Re-triever/" />
+  <meta property="og:title" content="Re:triever — Free Automatic Version Control for macOS & Windows" />
+  <meta property="og:description" content="Never lose a save, overwrite a draft, or regret an edit again. Zero-setup background file history and time-travel utility." />
+  <meta property="og:image" content="https://re-triever.github.io/Re-triever/app_icon.png" />
+  <meta property="og:site_name" content="Re:triever" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:url" content="https://re-triever.github.io/Re-triever/" />
+  <meta name="twitter:title" content="Re:triever — Automatic Version Control for macOS & Windows" />
+  <meta name="twitter:description" content="Never lose a save or overwrite a draft again. Free background file time-travel utility." />
+  <meta name="twitter:image" content="https://re-triever.github.io/Re-triever/app_icon.png" />
+  
+  <!-- Schema.org Structured Data (JSON-LD) for Search Engine Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Re:triever",
+    "operatingSystem": "macOS 11+, Windows 10, Windows 11",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Free, zero-setup background version control & local file backup utility for macOS and Windows.",
+    "url": "https://re-triever.github.io/Re-triever/",
+    "image": "https://re-triever.github.io/Re-triever/app_icon.png",
+    "license": "https://www.gnu.org/licenses/gpl-3.0.html"
+  }
+  </script>
+  
+  <!-- Google Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brandDark: '#353536',
+            brandOrange: '#FF6F1E',
+            brandCream: '#FEF1D7',
+            brandSurface: '#2B2B2C',
+            brandHover: '#404042'
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #353536;
+      color: #FEF1D7;
+    }
+    .glow-orange {
+      box-shadow: 0 16px 48px rgba(255, 111, 30, 0.35);
+    }
+    .card-border {
+      border: 1px solid rgba(254, 241, 215, 0.12);
+    }
+    .card-border:hover {
+      border-color: rgba(255, 111, 30, 0.4);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-[#FF6F1E] selection:text-white">
+
+  <!-- 1. NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#353536]/90 border-b border-[#404042]">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" id="brand-logo-link" class="flex items-center space-x-3 group" aria-label="Re:triever Home">
+        <img src="app_icon.png" alt="Re:triever Logo" class="w-9 h-9 shadow-md group-hover:scale-105 transition-transform" />
+        <span class="text-xl font-extrabold tracking-tight">
+          <span class="text-[#FF6F1E]">Re</span><span class="text-[#FEF1D7]">:triever</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-[#FEF1D7]/80" aria-label="Main Navigation">
+        <a href="#features" id="nav-features-link" class="hover:text-[#FF6F1E] transition-colors">Features</a>
+        <a href="#how-it-works" id="nav-how-link" class="hover:text-[#FF6F1E] transition-colors">How It Works</a>
+        <a href="#platforms" id="nav-platforms-link" class="hover:text-[#FF6F1E] transition-colors">Platforms</a>
+        <a href="#download" id="nav-download-link" class="hover:text-[#FF6F1E] transition-colors">Download</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <a 
+          href="https://github.com/Re-triever/Re-triever" 
+          id="btn-github-nav"
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="px-4 py-2 text-xs font-bold rounded-full bg-[#2B2B2C] hover:bg-[#404042] text-[#FEF1D7] border border-[#404042] transition-all flex items-center space-x-2"
+          aria-label="GitHub Repository"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a 
+          href="#download"
+          id="btn-download-nav"
+          class="px-4 py-2 text-xs font-bold rounded-full bg-[#FF6F1E] hover:bg-[#E55F10] text-white transition-all shadow-md shadow-[#FF6F1E]/30 hover:scale-105"
+        >
+          Download Free
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section class="relative pt-20 pb-16 overflow-hidden">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      
+      <!-- Big App Icon -->
+      <div class="inline-block mb-8 animate-float">
+        <img 
+          src="app_icon.png" 
+          alt="Re:triever App Icon" 
+          class="w-48 h-48 mx-auto transform transition-transform hover:scale-105 drop-shadow-[0_16px_36px_rgba(255,111,30,0.35)]"
+        />
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
+        <span class="text-[#FF6F1E]">Re</span><span class="text-[#FEF1D7]">:triever</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl font-bold text-[#FEF1D7]/90 mb-4 max-w-2xl mx-auto leading-snug">
+        Instant Time-Travel & Automatic Version Control for Your Files
+      </p>
+
+      <p class="text-base md:text-lg text-[#FEF1D7]/70 max-w-xl mx-auto mb-10 leading-relaxed">
+        Never lose a save, overwrite a draft, or regret an edit again. A free, zero-setup background utility for <b>macOS</b> & <b>Windows</b> that silently backs up every file save automatically.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8" id="download">
+        <a 
+          href="https://github.com/Re-triever/Re-triever/releases/latest"
+          id="btn-download-mac"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto px-8 py-4 text-sm font-extrabold rounded-full bg-[#FF6F1E] hover:bg-[#E55F10] text-white transition-all shadow-lg shadow-[#FF6F1E]/40 hover:scale-105 flex items-center justify-center space-x-2"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.85c.66-.8 1.11-1.92.99-3.05-1 .04-2.2.67-2.9 1.49-.6.7-1.12 1.84-.98 2.95 1.12.09 2.23-.59 2.89-1.39z"/></svg>
+          <span>Download for macOS (.dmg)</span>
+        </a>
+
+        <a 
+          href="https://github.com/Re-triever/Re-triever/releases/latest"
+          id="btn-download-win"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto px-8 py-4 text-sm font-extrabold rounded-full bg-[#2B2B2C] hover:bg-[#404042] text-[#FEF1D7] border border-[#404042] transition-all hover:scale-105 flex items-center justify-center space-x-2"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.95-9.601L24 0v11.551H10.95M0 12.6h9.75v9.451L0 20.699M10.95 12.6H24V24l-13.05-1.849"/></svg>
+          <span>Download for Windows (.exe)</span>
+        </a>
+      </div>
+
+      <!-- Homebrew 1-Liner for macOS -->
+      <div class="mb-10 p-4 bg-[#2B2B2C] border border-[#404042] rounded-2xl max-w-xl mx-auto text-left">
+        <div class="flex items-center space-x-2 text-xs font-mono text-[#FEF1D7]/90">
+          <span class="text-[#FF6F1E] font-bold shrink-0">🍺 macOS Homebrew:</span>
+          <code class="text-[#FEF1D7] truncate selection:bg-[#FF6F1E]">brew tap Re-triever/re-triever https://github.com/Re-triever/Re-triever.git && brew install --cask re-triever</code>
+        </div>
+      </div>
+
+      <!-- Pill Highlights -->
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-[#FEF1D7]/70">
+        <span class="px-3 py-1 rounded-full bg-[#2B2B2C] border border-[#404042] flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#FF6F1E]"></span> 100% Free & Open Source
+        </span>
+        <span class="px-3 py-1 rounded-full bg-[#2B2B2C] border border-[#404042] flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#FF6F1E]"></span> 100% Offline & Private
+        </span>
+        <span class="px-3 py-1 rounded-full bg-[#2B2B2C] border border-[#404042] flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#FF6F1E]"></span> Zero Cloud Sign-Ups
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. FEATURE HIGHLIGHTS -->
+  <section id="features" class="py-16 bg-[#2B2B2C]/40 border-y border-[#404042]">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-3xl font-extrabold tracking-tight text-[#FEF1D7] mb-3">
+          Everything You Need, Nothing You Don't
+        </h2>
+        <p class="text-sm text-[#FEF1D7]/70">
+          Designed specifically for creatives, writers, developers, and everyday computer users.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Feature 1 -->
+        <article class="p-6 bg-[#2B2B2C] rounded-2xl card-border space-y-3 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-[#FF6F1E]/15 text-[#FF6F1E] flex items-center justify-center text-xl font-bold" aria-hidden="true">
+            ⚡
+          </div>
+          <h3 class="text-lg font-bold text-[#FEF1D7]">Zero Setup Required</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Launch Re:triever once and it sits quietly in your menu bar or system tray. No manual backup buttons, no login forms.
+          </p>
+        </article>
+
+        <!-- Feature 2 -->
+        <article class="p-6 bg-[#2B2B2C] rounded-2xl card-border space-y-3 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-[#FF6F1E]/15 text-[#FF6F1E] flex items-center justify-center text-xl font-bold" aria-hidden="true">
+            📁
+          </div>
+          <h3 class="text-lg font-bold text-[#FEF1D7]">1-Click Folder Watch</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Right-click any folder in macOS Finder or Windows Explorer and click <b>"Observe with Re:triever"</b> to track it instantly.
+          </p>
+        </article>
+
+        <!-- Feature 3 -->
+        <article class="p-6 bg-[#2B2B2C] rounded-2xl card-border space-y-3 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-[#FF6F1E]/15 text-[#FF6F1E] flex items-center justify-center text-xl font-bold" aria-hidden="true">
+            🔍
+          </div>
+          <h3 class="text-lg font-bold text-[#FEF1D7]">Visual Change Diffs</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Inspect exact line-by-line additions, deletions, and side-by-side version comparisons for every single save.
+          </p>
+        </article>
+
+        <!-- Feature 4 -->
+        <article class="p-6 bg-[#2B2B2C] rounded-2xl card-border space-y-3 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-[#FF6F1E]/15 text-[#FF6F1E] flex items-center justify-center text-xl font-bold" aria-hidden="true">
+            ⏪
+          </div>
+          <h3 class="text-lg font-bold text-[#FEF1D7]">1-Click Instant Restore</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Made a mistake? Overwrite your current file with any past version in 1 click or export isolated preview copies.
+          </p>
+        </article>
+
+        <!-- Feature 5 -->
+        <article class="p-6 bg-[#2B2B2C] rounded-2xl card-border space-y-3 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-[#FF6F1E]/15 text-[#FF6F1E] flex items-center justify-center text-xl font-bold" aria-hidden="true">
+            💾
+          </div>
+          <h3 class="text-lg font-bold text-[#FEF1D7]">Smart Storage Engine</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Saves up to 90%+ disk space by storing only modified data blocks between saves rather than full duplicate files.
+          </p>
+        </article>
+
+        <!-- Feature 6 -->
+        <article class="p-6 bg-[#2B2B2C] rounded-2xl card-border space-y-3 transition-all hover:-translate-y-1">
+          <div class="w-12 h-12 rounded-xl bg-[#FF6F1E]/15 text-[#FF6F1E] flex items-center justify-center text-xl font-bold" aria-hidden="true">
+            🔒
+          </div>
+          <h3 class="text-lg font-bold text-[#FEF1D7]">100% Offline & Private</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Your files stay 100% on your computer. Re:triever runs completely offline with zero external network traffic.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. HOW IT WORKS -->
+  <section id="how-it-works" class="py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold tracking-tight text-[#FEF1D7] mb-3">
+          How Re:triever Works in 3 Steps
+        </h2>
+        <p class="text-sm text-[#FEF1D7]/70">
+          Set it once and never worry about losing work again.
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        
+        <!-- Step 1 -->
+        <div class="p-6 bg-[#2B2B2C] rounded-2xl card-border flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-full bg-[#FF6F1E] text-white font-extrabold text-lg flex items-center justify-center shrink-0 shadow-md">
+              1
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-[#FEF1D7]">Watch Any Directory</h3>
+              <p class="text-xs text-[#FEF1D7]/70 mt-1">
+                Right-click any folder in macOS Finder or Windows Explorer and click <b>"Observe with Re:triever"</b>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-6 bg-[#2B2B2C] rounded-2xl card-border flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-full bg-[#FF6F1E] text-white font-extrabold text-lg flex items-center justify-center shrink-0 shadow-md">
+              2
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-[#FEF1D7]">Work Normally & Save</h3>
+              <p class="text-xs text-[#FEF1D7]/70 mt-1">
+                Edit your documents, code, spreadsheets, or designs in Word, VS Code, Photoshop, or Excel as you always do.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-6 bg-[#2B2B2C] rounded-2xl card-border flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-full bg-[#FF6F1E] text-white font-extrabold text-lg flex items-center justify-center shrink-0 shadow-md">
+              3
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-[#FEF1D7]">Time-Travel Any Save</h3>
+              <p class="text-xs text-[#FEF1D7]/70 mt-1">
+                Click the golden retriever icon in your Menu Bar or System Tray anytime to inspect diffs and restore any version!
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. PLATFORMS -->
+  <section id="platforms" class="py-16 bg-[#2B2B2C]/40 border-y border-[#404042]">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      
+      <h2 class="text-3xl font-extrabold tracking-tight text-[#FEF1D7] mb-12">
+        Native Support for macOS & Windows
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- macOS -->
+        <div class="p-8 bg-[#2B2B2C] rounded-2xl card-border text-left space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center text-2xl" aria-hidden="true">
+            🍎
+          </div>
+          <h3 class="text-xl font-bold text-[#FEF1D7]">macOS</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Full support for macOS 11 Big Sur through macOS 15 Sequoia (Apple Silicon & Intel). Integrates with Menu Bar & Finder context actions.
+          </p>
+        </div>
+
+        <!-- Windows -->
+        <div class="p-8 bg-[#2B2B2C] rounded-2xl card-border text-left space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl" aria-hidden="true">
+            🪟
+          </div>
+          <h3 class="text-xl font-bold text-[#FEF1D7]">Windows</h3>
+          <p class="text-xs text-[#FEF1D7]/70 leading-relaxed">
+            Full support for Windows 10 & Windows 11 (64-bit). Integrates with System Tray & File Explorer right-click context menu entries.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. FIRST-TIME LAUNCH GUIDE -->
+  <section id="faq" class="py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-3xl font-extrabold tracking-tight text-[#FEF1D7] mb-3">
+          First-Time Launch Guide
+        </h2>
+        <p class="text-xs text-[#FEF1D7]/70">
+          Standard operating system verification steps for first-time application setup.
+        </p>
+      </div>
+
+      <div class="p-8 bg-[#2B2B2C] rounded-2xl card-border space-y-6 text-left">
+        <div>
+          <h3 class="text-base font-bold text-[#FF6F1E] mb-2">First-Time Launch Verification</h3>
+          <p class="text-xs text-[#FEF1D7]/80 leading-relaxed">
+            When launching <b>Re:triever</b> for the first time, macOS Gatekeeper and Windows Defender SmartScreen verify newly downloaded software from the internet. Below are the standard steps to complete first-time launch approval on your system.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#404042]">
+          <div>
+            <h4 class="text-sm font-bold text-[#FEF1D7] mb-2">🍎 Launching on macOS</h4>
+            <ol class="text-xs text-[#FEF1D7]/70 space-y-1.5 list-decimal list-inside">
+              <li>Right-Click (or Control-Click) <b>Re:triever.app</b> and select <b>Open</b>.</li>
+              <li>Click <b>Open</b> on the system prompt.</li>
+              <li>Or go to <b>System Settings ➔ Privacy & Security</b> and click <b>Open Anyway</b>.</li>
+              <li>Or run in Terminal: <code class="text-[#FF6F1E] font-mono">sudo xattr -rd com.apple.quarantine /Applications/Re:triever.app</code></li>
+            </ol>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-bold text-[#FEF1D7] mb-2">🪟 Launching on Windows</h4>
+            <ol class="text-xs text-[#FEF1D7]/70 space-y-1.5 list-decimal list-inside">
+              <li>Open <b>Re-triever-Setup-1.0.0.exe</b>.</li>
+              <li>Click <b>More info</b> on the Windows SmartScreen dialog.</li>
+              <li>Click <b>Run anyway</b>.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FOOTER -->
+  <footer class="mt-auto py-10 border-t border-[#404042] bg-[#353536]">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#FEF1D7]/60">
+      <div class="flex items-center space-x-3">
+        <img src="app_icon.png" alt="Re:triever Logo" class="w-6 h-6" />
+        <span class="font-bold text-[#FEF1D7]">
+          <span class="text-[#FF6F1E]">Re</span>:triever
+        </span>
+        <span>— Released under the GNU GPLv3 License</span>
+      </div>
+
+      <div class="flex items-center space-x-6">
+        <a href="https://github.com/Re-triever/Re-triever" id="footer-github-link" target="_blank" rel="noopener noreferrer" class="hover:text-[#FF6F1E] transition-colors">GitHub Repository</a>
+        <a href="https://github.com/Re-triever/Re-triever/releases" id="footer-releases-link" target="_blank" rel="noopener noreferrer" class="hover:text-[#FF6F1E] transition-colors">Releases</a>
+      </div>
+    </div>
+  <!-- Dynamic GitHub Release Direct Download Script -->
+  <script>
+    async function initDynamicDownloads() {
+      try {
+        const response = await fetch('https://api.github.com/repos/Re-triever/Re-triever/releases/latest');
+        if (!response.ok) return;
+        const releaseData = await response.json();
+        if (!releaseData.assets || !releaseData.assets.length) return;
+
+        const macBtn = document.getElementById('btn-download-mac');
+        const winBtn = document.getElementById('btn-download-win');
+
+        // Find macOS (.dmg or .zip) and Windows (.exe) assets
+        const macAsset = releaseData.assets.find(a => a.name.endsWith('.dmg')) || releaseData.assets.find(a => a.name.endsWith('.zip'));
+        const winAsset = releaseData.assets.find(a => a.name.endsWith('.exe'));
+
+        if (macAsset && macBtn) {
+          macBtn.href = macAsset.browser_download_url;
+        }
+        if (winAsset && winBtn) {
+          winBtn.href = winAsset.browser_download_url;
+        }
+      } catch (err) {
+        console.warn('Failed to load dynamic release downloads:', err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDynamicDownloads);
+    } else {
+      initDynamicDownloads();
+    }
+  </script>
+</body>
+</html>
