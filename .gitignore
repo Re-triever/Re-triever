@@ -4,6 +4,7 @@ node_modules/
 
 # Build and output directories
 dist/
+dist_app/
 out/
 build/
 .vite/
