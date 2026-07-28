@@ -89,10 +89,16 @@ Your files are your business. <span style="color: #ff6f1d;">Re</span><span style
 
 ## 📥 Download & Installation
 
-### Option 1: Download Ready-to-Run Installers
-Download the latest free release for your operating system:
-- **macOS**: Download the `.dmg` installer or `.zip` application.
-- **Windows**: Download the `.exe` installer.
+### Option 1: macOS Homebrew Cask (Recommended for macOS)
+Install **Re:triever** on macOS via Homebrew (automatically clears Gatekeeper quarantine):
+```bash
+brew install --cask https://raw.githubusercontent.com/Re-triever/Re-triever/main/Casks/re-triever.rb
+```
+
+### Option 2: Download Ready-to-Run Installers
+Download free prebuilt installers directly:
+- **macOS**: Download `.dmg` installer or `.zip` archive from [GitHub Releases](https://github.com/Re-triever/Re-triever/releases/latest).
+- **Windows**: Download `.exe` installer from [GitHub Releases](https://github.com/Re-triever/Re-triever/releases/latest).
 
 ### Option 2: Run from Source
 If you prefer running from source:
