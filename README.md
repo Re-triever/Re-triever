@@ -116,12 +116,15 @@ npm run electron:dev
 > [!IMPORTANT]
 > Because **<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is an open-source community project built on GitHub Actions without expensive commercial developer certificates, **macOS Gatekeeper** and **Windows SmartScreen** may display an *"Unidentified Developer"* or *"Unrecognized App"* warning on first launch. **This is a standard false positive.**
 
-### 🍎 On macOS:
-1. **Control-Click (or Right-Click)** `Re:triever.app` in Finder and select **Open**.
-2. Click **Open** on the security prompt (or go to **System Settings ➔ Privacy & Security** and click **Open Anyway**).
-3. Alternatively, clear quarantine via Terminal:
+### 🍎 On macOS (Fixing "macOS cannot verify that this app is free from malware"):
+> macOS Sequoia / Sonoma / Ventura display this standard prompt for all open-source apps downloaded outside the Mac App Store that are not notarized with Apple's $99/year fee.
+
+1. **Right-Click (or Control-Click)** `Re:triever.app` in Finder and select **Open**.
+2. Click **Open** on the security dialog box.
+3. **Or via System Settings**: Go to **System Settings ➔ Privacy & Security**, scroll down to Security, and click **Open Anyway**.
+4. **Or via Terminal**: Clear quarantine in 1 command:
    ```bash
-   xattr -cr /Applications/Re:triever.app
+   sudo xattr -rd com.apple.quarantine /Applications/Re:triever.app
    ```
 
 ### 🪟 On Windows:

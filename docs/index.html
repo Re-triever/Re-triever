@@ -421,10 +421,12 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#404042]">
           <div>
-            <h4 class="text-sm font-bold text-[#FEF1D7] mb-2">🍎 Opening on macOS</h4>
+            <h4 class="text-sm font-bold text-[#FEF1D7] mb-2">🍎 Opening on macOS ("cannot verify free from malware")</h4>
             <ol class="text-xs text-[#FEF1D7]/70 space-y-1.5 list-decimal list-inside">
-              <li>Control-Click (or Right-Click) <b>Re:triever.app</b> and select <b>Open</b>.</li>
-              <li>Click <b>Open</b> on the prompt (or go to System Settings ➔ Privacy & Security ➔ Open Anyway).</li>
+              <li>Right-Click (or Control-Click) <b>Re:triever.app</b> and select <b>Open</b>.</li>
+              <li>Click <b>Open</b> on the dialog box.</li>
+              <li>Or go to <b>System Settings ➔ Privacy & Security</b> and click <b>Open Anyway</b>.</li>
+              <li>Or run in Terminal: <code class="text-[#FF6F1E] font-mono">sudo xattr -rd com.apple.quarantine /Applications/Re:triever.app</code></li>
             </ol>
           </div>
 
