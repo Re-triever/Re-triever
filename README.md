@@ -1,16 +1,18 @@
 <div align="center">
 
   <br />
-  <img src="src/renderer/src/assets/app_icon.png" width="160" height="160" alt="Re:triever App Icon" style="border-radius: 32px; box-shadow: 0 12px 36px rgba(255, 111, 29, 0.35);" />
   <br />
+  <img src="src/renderer/src/assets/app_icon.png" width="220" height="220" alt="Re:triever Icon" style="border-radius: 44px; box-shadow: 0 16px 48px rgba(255, 111, 29, 0.4); margin-bottom: 28px;" />
   <br />
 
-  # <span style="color: #FF6F1D; font-size: 2.2em; font-weight: 800;">Re</span><span style="color: #343636; font-size: 2.2em; font-weight: 800;">:triever</span>
+  # <span style="font-size: 2.8em; font-weight: 800; tracking-tight: true;"><span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span></span>
+
+  <br />
 
   <h3>Instant Time-Travel & Automatic Version Control for Your Files</h3>
 
   <p align="center">
-    <b>Never lose a save, overwrite a draft, or regret a edit again.</b><br />
+    <b>Never lose a save, overwrite a draft, or regret an edit again.</b><br />
     A free, zero-setup background utility for <b>macOS</b> & <b>Windows</b> that silently backs up every file save automatically.
   </p>
 
@@ -33,15 +35,15 @@
 <br />
 
 > [!NOTE]
-> **Re:triever is 100% Free forever.** No subscriptions, no cloud sign-ups, no file size limits, and no ads. All file backups stay completely private on your computer.
+> **<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is 100% Free forever. No subscriptions, no cloud sign-ups, no file size limits, and no ads. All file backups stay completely private on your computer.
 
 ---
 
-## 🌟 Why You’ll Love Re:triever
+## 🌟 Why You’ll Love <span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>
 
 Have you ever accidentally overwritten an important document, lost hours of work on a design draft, or wished you could jump back to how your file looked yesterday?
 
-**Re:triever is your safety net.** It sits quietly in your menu bar or system tray and automatically remembers every single time you save a file (<kbd>⌘ Cmd</kbd> + <kbd>S</kbd> or <kbd>Ctrl</kbd> + <kbd>S</kbd>).
+**<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is your safety net. It sits quietly in your menu bar or system tray and automatically remembers every single time you save a file (<kbd>⌘ Cmd</kbd> + <kbd>S</kbd> or <kbd>Ctrl</kbd> + <kbd>S</kbd>).
 
 ```
    Save any File  ──►  Re:triever Remembers Automatically  ──►  Restore Any Revision Anytime
@@ -53,10 +55,10 @@ Have you ever accidentally overwritten an important document, lost hours of work
 ## 🔥 Key Highlights
 
 ### ⚡ Zero Setup Required
-Simply launch Re:triever once, and it goes to work in your background. No complicated setup, no login screens, and no manual backup buttons to click.
+Simply launch <span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> once, and it goes to work in your background. No complicated setup, no login screens, and no manual backup buttons to click.
 
 ### 📁 1-Click Folder Watching
-Right-click any folder in **macOS Finder** or **Windows Explorer** and click **"Observe with Re:triever"**. Re:triever will automatically watch every file inside that folder from then on.
+Right-click any folder in **macOS Finder** or **Windows Explorer** and click **"Observe with Re:triever"**. <span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> will automatically watch every file inside that folder from then on.
 
 ### 🔍 Visual Change History & Line Diffs
 Want to see exactly what changed between two versions? Inspect your complete revision timeline, see line-by-line additions and deletions, or compare any two saved versions side-by-side.
@@ -65,16 +67,16 @@ Want to see exactly what changed between two versions? Inspect your complete rev
 Need to undo a mistake? Overwrite your current file with any past version in one click, or export an isolated preview copy so you can compare before replacing your work.
 
 ### 💾 Smart Storage Engine
-Re:triever automatically optimizes disk space so saving hundreds of revisions won’t clutter your hard drive. It only stores the exact changes between saves, saving up to 90% of your disk space.
+<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> automatically optimizes disk space so saving hundreds of revisions won’t clutter your hard drive. It only stores the exact changes between saves, saving up to 90% of your disk space.
 
 ### 🔒 100% Local & Completely Private
-Your files are your business. Re:triever works entirely offline. Your documents, code, and history never leave your computer and are never sent to external servers.
+Your files are your business. <span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> works entirely offline. Your documents, code, and history never leave your computer and are never sent to external servers.
 
 ---
 
 ## 💻 Platform Support
 
-Re:triever is built natively for **macOS** and **Windows**:
+<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> is built natively for **macOS** and **Windows**:
 
 | Platform | Features Supported | How to Use |
 | :--- | :--- | :--- |
@@ -107,7 +109,7 @@ npm run electron:dev
 
 ---
 
-## 🎯 How to Use Re:triever in 3 Easy Steps
+## 🎯 How to Use <span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span> in 3 Easy Steps
 
 1. **Watch a Folder**: Right-click any folder on your computer and click **"Observe with Re:triever"**.
 2. **Work Normally**: Edit and save your files in Word, VS Code, Photoshop, Excel, or any application as you normally do.
@@ -117,11 +119,11 @@ npm run electron:dev
 
 ## 📄 License
 
-**Re:triever** is open-source software released under the **MIT License**. Free to use for personal, commercial, and creative projects forever.
+**<span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span>** is open-source software released under the **MIT License**. Free to use for personal, commercial, and creative projects forever.
 
 <div align="center">
 
   ---
-  <sub>Created with ❤️ for <b>macOS</b> & <b>Windows</b> by the <b><span style="color: #FF6F1D;">Re</span><span style="color: #343636;">:triever</span></b> team.</sub>
+  <sub>Created with ❤️ for <b>macOS</b> & <b>Windows</b> by the <b><span style="color: #ff6f1d;">Re</span><span style="color: #343636;">:triever</span></b> team.</sub>
 
 </div>
