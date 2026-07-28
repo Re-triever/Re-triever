@@ -11,29 +11,29 @@ export default function RestoreModal({
   if (!selectedCommit) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-4 bg-black/80">
-      <div className="w-full max-w-sm bg-[#28201D] border border-[#382D28] rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 text-[#FAF0E6]">
-        <div className="flex items-center justify-between border-b border-[#382D28] pb-3">
+    <div className="fixed inset-0 backdrop-blur-md z-50 flex items-center justify-center p-4 bg-black/60">
+      <div className="w-full max-w-sm bg-[#2B2B2C] border border-[#404042] rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 text-[#FEF1D7]">
+        <div className="flex items-center justify-between border-b border-[#404042] pb-3">
           <div className="flex items-center gap-2">
-            <RotateCcw className="w-4 h-4 text-[#E07A5F]" />
-            <h3 className="text-sm font-bold text-[#FAF0E6]">Restore File Version</h3>
+            <RotateCcw className="w-4 h-4 text-[#FF6F1E]" />
+            <h3 className="text-sm font-bold text-[#FEF1D7]">Restore File Version</h3>
           </div>
           <button 
             onClick={onClose}
-            className="w-7 h-7 rounded-full bg-[#342B28] hover:bg-[#423733] text-[#9C8E87] hover:text-[#FAF0E6] flex items-center justify-center text-xs font-bold transition-colors shrink-0"
+            className="w-7 h-7 rounded-full bg-[#353536] hover:bg-[#404042] text-[#FEF1D7]/70 hover:text-[#FEF1D7] flex items-center justify-center text-xs font-bold transition-colors shrink-0"
           >
             ✕
           </button>
         </div>
 
-        <div className="p-3.5 bg-[#1E1715] rounded-xl border border-[#382D28] space-y-2">
-          <div className="text-xs font-bold text-[#FAF0E6] truncate">
+        <div className="p-3.5 bg-[#353536] rounded-xl border border-[#404042] space-y-2">
+          <div className="text-xs font-bold text-[#FEF1D7] truncate">
             {selectedCommit.file_path.split('/').pop()}
           </div>
-          <div className="text-[11px] font-mono text-[#9C8E87] truncate">
+          <div className="text-[11px] font-mono text-[#FEF1D7]/60 truncate">
             {selectedCommit.file_path}
           </div>
-          <div className="flex items-center justify-between text-[11px] text-[#9C8E87] pt-2 border-t border-[#382D28]">
+          <div className="flex items-center justify-between text-[11px] text-[#FEF1D7]/60 pt-2 border-t border-[#404042]">
             <span>Saved {formatTimeAgo(selectedCommit.timestamp)}</span>
             <span>{formatBytes(selectedCommit.file_size)}</span>
           </div>
@@ -43,7 +43,7 @@ export default function RestoreModal({
           <button
             disabled={restoring}
             onClick={() => onRestoreCommit(selectedCommit, selectedCommit.file_path)}
-            className="peach-btn-primary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-50"
+            className="orange-btn-primary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <RotateCcw className="w-4 h-4" />
             {restoring ? 'Restoring File...' : '⚡ Overwrite Current File Directly'}
@@ -52,16 +52,16 @@ export default function RestoreModal({
           <button
             disabled={restoring}
             onClick={() => onRestoreCommit(selectedCommit, undefined)}
-            className="peach-btn-secondary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-50"
+            className="orange-btn-secondary w-full py-2.5 text-xs flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            <FolderPlus className="w-4 h-4 text-[#9C8E87]" />
+            <FolderPlus className="w-4 h-4 text-[#FEF1D7]/70" />
             📁 Export / Save as Custom Copy...
           </button>
 
           <button
             disabled={restoring}
             onClick={onClose}
-            className="w-full py-2 rounded-full text-xs font-semibold text-[#9C8E87] hover:text-[#FAF0E6] transition-colors"
+            className="w-full py-2 rounded-full text-xs font-semibold text-[#FEF1D7]/70 hover:text-[#FEF1D7] transition-colors"
           >
             Cancel
           </button>

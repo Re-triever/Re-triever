@@ -422,7 +422,7 @@ export default function App() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between overflow-hidden bg-[oklch(0.962_0.059_95.617)] text-[#2A201A] relative">
+    <div className="w-full h-screen flex flex-col justify-between overflow-hidden bg-[#353536] text-[#FEF1D7] relative">
       
       {/* 1. HEADER BAR */}
       <Header
@@ -448,7 +448,7 @@ export default function App() {
       />
 
       {/* 4. MAIN TAB CONTENT AREA */}
-      <main className="flex-1 overflow-hidden p-4 flex flex-col space-y-3 bg-[oklch(0.962_0.059_95.617)]">
+      <main className="flex-1 overflow-hidden p-4 flex flex-col space-y-3 bg-[#353536]">
         <Toast toast={toast} />
 
         {activeTab === 'activity' && (

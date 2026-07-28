@@ -3,14 +3,14 @@ import { History, FileCode, Folder, Settings } from 'lucide-react';
 
 export default function NavTabs({ activeTab, setActiveTab, folderCount }) {
   return (
-    <div className="px-5 pt-3 pb-1 bg-[oklch(0.962_0.059_95.617)] flex border-b border-[#EEDCC8] space-x-2">
+    <div className="px-5 pt-3 pb-1 bg-[#353536] flex border-b border-[#404042] space-x-2">
       {/* Activity Feed Tab */}
       <button
         onClick={() => setActiveTab('activity')}
         className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'activity'
-            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
-            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
+            ? 'bg-[#FF6F1E] text-white shadow-md shadow-[#FF6F1E]/30 scale-105'
+            : 'bg-[#2B2B2C] hover:bg-[#404042] text-[#FEF1D7] hover:text-white border border-[#404042]'
         }`}
       >
         <History className="w-3.5 h-3.5" />
@@ -22,8 +22,8 @@ export default function NavTabs({ activeTab, setActiveTab, folderCount }) {
         onClick={() => setActiveTab('history')}
         className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'history'
-            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
-            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
+            ? 'bg-[#FF6F1E] text-white shadow-md shadow-[#FF6F1E]/30 scale-105'
+            : 'bg-[#2B2B2C] hover:bg-[#404042] text-[#FEF1D7] hover:text-white border border-[#404042]'
         }`}
       >
         <FileCode className="w-3.5 h-3.5" />
@@ -35,8 +35,8 @@ export default function NavTabs({ activeTab, setActiveTab, folderCount }) {
         onClick={() => setActiveTab('folders')}
         className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'folders'
-            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
-            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
+            ? 'bg-[#FF6F1E] text-white shadow-md shadow-[#FF6F1E]/30 scale-105'
+            : 'bg-[#2B2B2C] hover:bg-[#404042] text-[#FEF1D7] hover:text-white border border-[#404042]'
         }`}
       >
         <Folder className="w-3.5 h-3.5" />
@@ -48,8 +48,8 @@ export default function NavTabs({ activeTab, setActiveTab, folderCount }) {
         onClick={() => setActiveTab('settings')}
         className={`px-4 py-2 text-xs font-bold rounded-full transition-all flex items-center gap-2 ${
           activeTab === 'settings'
-            ? 'bg-[#E07A5F] text-white shadow-md shadow-[#E07A5F]/20 scale-105'
-            : 'bg-white hover:bg-[#FFF8F2] text-[#786658] hover:text-[#2A201A] border border-[#EEDCC8]'
+            ? 'bg-[#FF6F1E] text-white shadow-md shadow-[#FF6F1E]/30 scale-105'
+            : 'bg-[#2B2B2C] hover:bg-[#404042] text-[#FEF1D7] hover:text-white border border-[#404042]'
         }`}
         title="Settings & Preferences"
       >

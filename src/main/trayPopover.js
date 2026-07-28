@@ -9,19 +9,45 @@ class TrayPopoverManager {
     this.status = 'active'; // 'active', 'chunking', 'idle', 'error'
   }
 
+  getAppIcon() {
+    const fs = require('fs');
+    const possiblePaths = [
+      path.join(__dirname, '../renderer/src/assets/app_icon.png'),
+      path.join(app.getAppPath(), 'src/renderer/src/assets/app_icon.png'),
+      path.join(app.getAppPath(), 'dist/assets/app_icon.png'),
+      path.join(__dirname, '../../build/app_icon.png')
+    ];
+
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) {
+        const img = nativeImage.createFromPath(p);
+        if (!img.isEmpty()) {
+          return img;
+        }
+      }
+    }
+    return null;
+  }
+
   init() {
     // Enable dock icon on macOS for easy access alongside Menu Bar
-    if (app.dock) {
+    const appIcon = this.getAppIcon();
+    if (app.dock && appIcon) {
       app.dock.show();
-      app.dock.setIcon(this.createTrayIconImage('active'));
+      app.dock.setIcon(appIcon);
     }
 
     this.createTrayIcon();
     this.createPopoverWindow();
   }
 
-  // Generate dynamic native tray icon image with status indicator dot
+  // Generate native tray icon image with status indicator
   createTrayIconImage(status = 'active') {
+    const baseIcon = this.getAppIcon();
+    if (baseIcon) {
+      return baseIcon.resize({ width: 22, height: 22 });
+    }
+
     const colorHex = status === 'chunking' ? '#F59E0B' : status === 'error' ? '#EF4444' : '#10B981';
     
     const svgIcon = `<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
@@ -38,12 +64,7 @@ class TrayPopoverManager {
   createTrayIcon() {
     const icon = this.createTrayIconImage(this.status);
     this.tray = new Tray(icon);
-    this.tray.setToolTip('Re-triever - Version Control Active');
-
-    // Add visible title in macOS Menu Bar
-    if (process.platform === 'darwin') {
-      this.tray.setTitle(' Re-triever');
-    }
+    this.tray.setToolTip('Re:triever - Version Control Active');
 
     this.tray.on('click', () => {
       this.togglePopover();
@@ -51,10 +72,10 @@ class TrayPopoverManager {
 
     this.tray.on('right-click', () => {
       const contextMenu = Menu.buildFromTemplate([
-        { label: 'Re-triever Version Control', enabled: false },
+        { label: 'Re:triever Version Control', enabled: false },
         { type: 'separator' },
         { label: 'Open Tray Window', click: () => this.showPopover() },
-        { label: 'Quit Re-triever', click: () => app.quit() }
+        { label: 'Quit Re:triever', click: () => app.quit() }
       ]);
       this.tray.popUpContextMenu(contextMenu);
     });
@@ -65,7 +86,7 @@ class TrayPopoverManager {
     if (this.tray) {
       const updatedIcon = this.createTrayIconImage(status);
       this.tray.setImage(updatedIcon);
-      this.tray.setToolTip(`Re-triever - ${status === 'chunking' ? 'Saving file version...' : 'Active'}`);
+      this.tray.setToolTip(`Re:triever - ${status === 'chunking' ? 'Saving file version...' : 'Active'}`);
     }
 
     if (this.popoverWindow && !this.popoverWindow.isDestroyed()) {
@@ -74,6 +95,7 @@ class TrayPopoverManager {
   }
 
   createPopoverWindow() {
+    const appIcon = this.getAppIcon();
     this.popoverWindow = new BrowserWindow({
       width: 960,
       height: 680,
@@ -84,6 +106,7 @@ class TrayPopoverManager {
       resizable: true,
       alwaysOnTop: true,
       skipTaskbar: false,
+      icon: appIcon || undefined,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,

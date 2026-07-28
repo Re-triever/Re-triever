@@ -53,7 +53,8 @@
   },
   "build": {
     "appId": "com.retriever.app",
-    "productName": "Re-triever",
+    "productName": "Re:triever",
+    "icon": "src/renderer/src/assets/app_icon.png",
     "directories": {
       "output": "dist_app"
     },
@@ -64,6 +65,7 @@
       "package.json"
     ],
     "mac": {
+      "icon": "src/renderer/src/assets/app_icon.png",
       "target": [
         "dmg",
         "zip"
@@ -71,11 +73,13 @@
       "category": "public.app-category.utilities"
     },
     "win": {
+      "icon": "src/renderer/src/assets/app_icon.png",
       "target": [
         "nsis"
       ]
     },
     "linux": {
+      "icon": "src/renderer/src/assets/app_icon.png",
       "target": [
         "AppImage",
         "deb"

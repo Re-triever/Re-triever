@@ -23,16 +23,32 @@ class ContextMenuManager {
     }
   }
 
+  getNotificationIcon() {
+    const possiblePaths = [
+      path.join(__dirname, '../renderer/src/assets/app_icon.png'),
+      path.join(app.getAppPath(), 'src/renderer/src/assets/app_icon.png'),
+      path.join(app.getAppPath(), 'dist/assets/app_icon.png'),
+      path.join(__dirname, '../../build/app_icon.png')
+    ];
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) return p;
+    }
+    return undefined;
+  }
+
   // Windows Registry Setup
   setupWindowsRegistry() {
     const exePath = process.execPath;
     const command = `"${exePath}" --watch "%1"`;
+    const iconPath = this.getNotificationIcon();
+    const iconArg = iconPath ? ` && reg add "HKCU\\Software\\Classes\\Directory\\shell\\ReTriever" /v Icon /d "${iconPath}" /f` : '';
+    const iconBgArg = iconPath ? ` && reg add "HKCU\\Software\\Classes\\Directory\\Background\\shell\\ReTriever" /v Icon /d "${iconPath}" /f` : '';
 
     // Directory context menu
-    const regCmdDir = `reg add "HKCU\\Software\\Classes\\Directory\\shell\\ReTriever" /ve /d "Observe with Re-triever" /f && reg add "HKCU\\Software\\Classes\\Directory\\shell\\ReTriever\\command" /ve /d "${command}" /f`;
+    const regCmdDir = `reg add "HKCU\\Software\\Classes\\Directory\\shell\\ReTriever" /ve /d "Observe with Re-triever" /f${iconArg} && reg add "HKCU\\Software\\Classes\\Directory\\shell\\ReTriever\\command" /ve /d "${command}" /f`;
     
     // Directory background context menu
-    const regCmdBg = `reg add "HKCU\\Software\\Classes\\Directory\\Background\\shell\\ReTriever" /ve /d "Observe with Re-triever" /f && reg add "HKCU\\Software\\Classes\\Directory\\Background\\shell\\ReTriever\\command" /ve /d "${command}" /f`;
+    const regCmdBg = `reg add "HKCU\\Software\\Classes\\Directory\\Background\\shell\\ReTriever" /ve /d "Observe with Re-triever" /f${iconBgArg} && reg add "HKCU\\Software\\Classes\\Directory\\Background\\shell\\ReTriever\\command" /ve /d "${command}" /f`;
 
     exec(regCmdDir, (err) => {
       if (err) console.warn('[ContextMenu] Windows Registry Directory add warning:', err.message);
@@ -46,11 +62,6 @@ class ContextMenuManager {
 
   // macOS Quick Action / Workflow helper setup
   setupMacQuickAction() {
-    const home = app.getPath('home');
-    const servicesDir = path.join(home, 'Library', 'Services');
-    const actionPath = path.join(servicesDir, 'Observe with Re-triever.workflow');
-
-    // Create protocol command handler for macOS Finder
     console.log('[ContextMenu] macOS protocol re-triever:// registered');
   }
 
@@ -98,9 +109,11 @@ class ContextMenuManager {
 
       // Desktop Toast Notification
       if (Notification.isSupported()) {
+        const icon = this.getNotificationIcon();
         new Notification({
-          title: 'Re-triever Active',
-          body: `Now watching "${folderName}" with Re-triever`,
+          title: 'Re:triever Active',
+          body: `Now watching "${folderName}" with Re:triever`,
+          icon: icon,
           silent: false,
         }).show();
       }

@@ -6,8 +6,8 @@
     user-select: none;
     -webkit-user-select: none;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: oklch(0.962 0.059 95.617);
-    color: #2A201A;
+    background-color: #353536;
+    color: #FEF1D7;
   }
 
   code, pre {
@@ -15,7 +15,7 @@
   }
 }
 
-/* Custom Scrollbar - Aesthetic Peach Style */
+/* Custom Scrollbar - Orange & Cream Style */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -24,81 +24,92 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(224, 122, 95, 0.3);
+  background: rgba(255, 111, 30, 0.4);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(224, 122, 95, 0.6);
+  background: rgba(255, 111, 30, 0.7);
 }
 
-/* Peach Aesthetic Cards & Utility Classes */
-.peach-card {
-  background-color: #FFFFFF;
+/* Custom UI Utility Buttons & Cards */
+.orange-card-dark {
+  background-color: #2B2B2C;
   border-radius: 14px;
-  border: 1px solid rgba(224, 122, 95, 0.18);
-  box-shadow: 0 2px 8px rgba(180, 130, 90, 0.06);
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(254, 241, 215, 0.12);
+  transition: all 0.2s ease;
 }
-.peach-card:hover {
-  background-color: #FFFBF7;
-  border-color: rgba(224, 122, 95, 0.35);
+.orange-card-dark:hover {
+  background-color: #404042;
+  border-color: rgba(255, 111, 30, 0.4);
 }
 
-.peach-btn-primary {
-  background-color: #E07A5F;
+.orange-card-cream {
+  background-color: #FEF1D7;
+  color: #353536;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 111, 30, 0.2);
+  transition: all 0.2s ease;
+}
+.orange-card-cream:hover {
+  background-color: #FFFFFF;
+  border-color: #FF6F1E;
+}
+
+.orange-btn-primary {
+  background-color: #FF6F1E;
   color: #FFFFFF;
   font-weight: 700;
   border-radius: 9999px;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(224, 122, 95, 0.25);
+  box-shadow: 0 4px 14px rgba(255, 111, 30, 0.35);
 }
-.peach-btn-primary:hover {
-  background-color: #D96A4E;
+.orange-btn-primary:hover {
+  background-color: #E55F10;
   transform: scale(1.03);
-  box-shadow: 0 6px 18px rgba(217, 106, 78, 0.35);
+  box-shadow: 0 6px 18px rgba(255, 111, 30, 0.45);
 }
-.peach-btn-primary:active {
+.orange-btn-primary:active {
   transform: scale(0.98);
 }
 
-.peach-btn-secondary {
-  background-color: #FFFFFF;
-  color: #2A201A;
+.orange-btn-secondary {
+  background-color: #2B2B2C;
+  color: #FEF1D7;
   font-weight: 600;
   border-radius: 9999px;
-  border: 1px solid rgba(224, 122, 95, 0.25);
-  box-shadow: 0 2px 6px rgba(180, 130, 90, 0.06);
+  border: 1px solid rgba(254, 241, 215, 0.2);
   transition: all 0.2s ease;
 }
-.peach-btn-secondary:hover {
-  background-color: #FFF8F2;
-  border-color: #E07A5F;
+.orange-btn-secondary:hover {
+  background-color: #404042;
+  border-color: #FF6F1E;
+  color: #FFFFFF;
   transform: scale(1.02);
 }
-.peach-btn-secondary:active {
+.orange-btn-secondary:active {
   transform: scale(0.98);
 }
 
-.peach-btn-danger {
+.orange-btn-danger {
   background-color: #E63946;
   color: #FFFFFF;
   font-weight: 700;
   border-radius: 9999px;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(230, 57, 70, 0.25);
+  box-shadow: 0 4px 14px rgba(230, 57, 70, 0.3);
 }
-.peach-btn-danger:hover {
+.orange-btn-danger:hover {
   background-color: #D62839;
   transform: scale(1.03);
 }
 
 /* Status Indicator Dot Animations */
 .status-dot-active {
-  background-color: #2A9D8F;
-  box-shadow: 0 0 10px #2A9D8F;
+  background-color: #FF6F1E;
+  box-shadow: 0 0 12px #FF6F1E;
 }
 
 .status-dot-chunking {
-  background-color: #E76F51;
-  box-shadow: 0 0 10px #E76F51;
+  background-color: #FEF1D7;
+  box-shadow: 0 0 12px #FEF1D7;
 }
