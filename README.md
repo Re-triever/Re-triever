@@ -1,20 +1,28 @@
 <div align="center">
 
-  <img src="src/renderer/src/assets/app_icon.png" width="96" height="96" alt="Re:triever Icon" style="border-radius: 20px; box-shadow: 0 8px 24px rgba(255,111,29,0.3);" />
+  <br />
+  <img src="src/renderer/src/assets/app_icon.png" width="160" height="160" alt="Re:triever App Icon" style="border-radius: 32px; box-shadow: 0 12px 36px rgba(255, 111, 29, 0.35);" />
+  <br />
+  <br />
 
-  # <span style="color: #FF6F1D;">Re</span><span style="color: #343636;">:triever</span>
+  # <span style="color: #FF6F1D; font-size: 2.2em; font-weight: 800;">Re</span><span style="color: #343636; font-size: 2.2em; font-weight: 800;">:triever</span>
 
-  <h3>Zero-Setup Automatic Background Version Control for macOS & Windows</h3>
+  <h3>Instant Time-Travel & Automatic Version Control for Your Files</h3>
 
-  <p>
-    <b>Never lose a file save or draft again. Silent, local, deduplicated file history right from your System Tray & OS Context Menu.</b>
+  <p align="center">
+    <b>Never lose a save, overwrite a draft, or regret a edit again.</b><br />
+    A free, zero-setup background utility for <b>macOS</b> & <b>Windows</b> that silently backs up every file save automatically.
   </p>
 
-  <p>
-    <a href="#-key-features"><img src="https://img.shields.io/badge/macOS-Supported-brightgreen?logo=apple&style=for-the-badge&logoColor=white" alt="macOS Support" /></a>
-    <a href="#-key-features"><img src="https://img.shields.io/badge/Windows-10%20%2F%2011-blue?logo=windows&style=for-the-badge&logoColor=white" alt="Windows Support" /></a>
-    <a href="#-architecture--tech-stack"><img src="https://img.shields.io/badge/Rust-FastCDC%20Engine-orange?logo=rust&style=for-the-badge&logoColor=white" alt="Rust Core" /></a>
-    <a href="#-architecture--tech-stack"><img src="https://img.shields.io/badge/Electron-31.7-47848F?logo=electron&style=for-the-badge&logoColor=white" alt="Electron" /></a>
+  <br />
+
+  <p align="center">
+    <a href="#-download--installation"><img src="https://img.shields.io/badge/macOS-Supported-brightgreen?logo=apple&style=for-the-badge&logoColor=white" alt="macOS Support" /></a>
+    &nbsp;
+    <a href="#-download--installation"><img src="https://img.shields.io/badge/Windows-10%20%2F%2011-blue?logo=windows&style=for-the-badge&logoColor=white" alt="Windows Support" /></a>
+    &nbsp;
+    <a href="#-100-free--private"><img src="https://img.shields.io/badge/100%25-Free%20%26%20Private-orange?style=for-the-badge" alt="100% Free" /></a>
+    &nbsp;
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License" /></a>
   </p>
 
@@ -22,133 +30,98 @@
 
 </div>
 
+<br />
+
 > [!NOTE]
-> **Re:triever** runs silently in your macOS Menu Bar or Windows System Tray. Right-click any folder in **macOS Finder** or **Windows Explorer** and select **"Observe with Re:triever"** to begin instant, zero-config file history tracking.
+> **Re:triever is 100% Free forever.** No subscriptions, no cloud sign-ups, no file size limits, and no ads. All file backups stay completely private on your computer.
 
 ---
 
-## 📖 Overview
+## 🌟 Why You’ll Love Re:triever
 
-<span style="color: #FF6F1D; font-weight: bold;">Re</span><span style="color: #343636; font-weight: bold;">:triever</span> is a lightweight desktop utility designed for **macOS** and **Windows** that automatically captures file revisions the moment you press <kbd>⌘ Cmd</kbd> + <kbd>S</kbd> or <kbd>Ctrl</kbd> + <kbd>S</kbd>.
+Have you ever accidentally overwritten an important document, lost hours of work on a design draft, or wished you could jump back to how your file looked yesterday?
 
-Powered by a native **Rust FastCDC (Content-Defined Chunking)** deduplication engine, **Re:triever** breaks file deltas into variable-size blocks using Rabin Fingerprinting. Identical chunks across saves and files are stored only once, saving **up to 90%+ disk space** compared to traditional duplicate file backups.
+**Re:triever is your safety net.** It sits quietly in your menu bar or system tray and automatically remembers every single time you save a file (<kbd>⌘ Cmd</kbd> + <kbd>S</kbd> or <kbd>Ctrl</kbd> + <kbd>S</kbd>).
+
+```
+   Save any File  ──►  Re:triever Remembers Automatically  ──►  Restore Any Revision Anytime
+ (Docs, Code, Sheets)        (Zero Setup Required)               (1-Click Instant Restore)
+```
 
 ---
 
-## ✨ Key Features
+## 🔥 Key Highlights
 
-```
-  📁 Observe any Folder  ──►  🦀 Rust FastCDC Chunking  ──►  ⚡ Deduplicated Storage
-  (Finder / Explorer)         (Rabin Fingerprinting)          (Save 90%+ Disk Space)
-```
+### ⚡ Zero Setup Required
+Simply launch Re:triever once, and it goes to work in your background. No complicated setup, no login screens, and no manual backup buttons to click.
 
-- ⚡ **Zero-Setup System Tray Engine**: Lives unobtrusively in your macOS Menu Bar (top right near clock) or Windows Taskbar Tray.
-- 📁 **1-Click OS Finder & Explorer Context Menu**: Right-click any folder and select **"Observe with Re:triever"** to watch it automatically.
-- 🦀 **Native Rust FastCDC Engine**: Content-Defined Chunking compiled into a high-performance Rust N-API Node addon.
-- 🔍 **Visual Line-by-Line Diffs & Timeline**: Inspect version histories, compare any two save points, and preview changes.
-- ⏪ **1-Click Instant Restoration**: Directly overwrite corrupted or unwanted files or export isolated preview copies.
-- 🔒 **100% Offline & Local**: All file metadata and deduplicated blobs are stored strictly on your local disk (`~/.re-triever`). No cloud, no telemetry.
+### 📁 1-Click Folder Watching
+Right-click any folder in **macOS Finder** or **Windows Explorer** and click **"Observe with Re:triever"**. Re:triever will automatically watch every file inside that folder from then on.
+
+### 🔍 Visual Change History & Line Diffs
+Want to see exactly what changed between two versions? Inspect your complete revision timeline, see line-by-line additions and deletions, or compare any two saved versions side-by-side.
+
+### ⏪ 1-Click Instant Restore
+Need to undo a mistake? Overwrite your current file with any past version in one click, or export an isolated preview copy so you can compare before replacing your work.
+
+### 💾 Smart Storage Engine
+Re:triever automatically optimizes disk space so saving hundreds of revisions won’t clutter your hard drive. It only stores the exact changes between saves, saving up to 90% of your disk space.
+
+### 🔒 100% Local & Completely Private
+Your files are your business. Re:triever works entirely offline. Your documents, code, and history never leave your computer and are never sent to external servers.
 
 ---
 
 ## 💻 Platform Support
 
-| Operating System | Status | Supported Formats | Native Shell Integration |
-| :--- | :--- | :--- | :--- |
-| **macOS** (11 Big Sur - 15 Sequoia) | 🟢 Official | Apple Silicon (`.dmg`, `.zip`) & Intel (`.dmg`, `.zip`) | Finder Quick Action / Context Menu & Menu Bar |
-| **Windows** (10 & 11) | 🟢 Official | 64-bit Installer (`.exe` NSIS) & Portable | Explorer Right-Click Context Menu & Taskbar Tray |
+Re:triever is built natively for **macOS** and **Windows**:
 
-> [!TIP]
-> On macOS, **Re:triever** integrates directly with Finder context menus and protocol handlers (`re-triever://`). On Windows, it registers native Shell entries in `HKCU\Software\Classes\Directory\shell`.
-
----
-
-## 🏗️ Architecture & Tech Stack
-
-```
- ┌────────────────────────────────────────────────────────┐
- │                      User UI                           │
- │        React 18 + Vite + Tailwind CSS (#353536)        │
- └──────────────────────────┬─────────────────────────────┘
-                            │ IPC & Electron Main Process
- ┌──────────────────────────▼─────────────────────────────┐
- │                 Electron Main Process                  │
- │   TrayPopoverManager  │  WatcherService (Chokidar)    │
- └──────────────────────────┬─────────────────────────────┘
-                            │ N-API Native Bindings
- ┌──────────────────────────▼─────────────────────────────┐
- │                    Rust Core Engine                    │
- │    FastCDC Chunking  │ BLAKE3 / SHA-256 Deduplication    │
- │              SQLite Local Metadata Store               │
- └────────────────────────────────────────────────────────┘
-```
-
-- **Core Engine**: Rust (`core/src/lib.rs`) with N-API native bindings.
-- **Deduplication Algorithm**: FastCDC (Content-Defined Chunking) & Rabin Fingerprinting.
-- **Desktop Runtime**: Electron 31 + Node.js.
-- **Frontend Stack**: React 18, Vite 5, Tailwind CSS v4, Lucide Icons.
-- **Storage Layer**: Embedded SQLite (`metadata.db`) & content-addressed blob directory (`blobs/`).
+| Platform | Features Supported | How to Use |
+| :--- | :--- | :--- |
+| 🍎 **macOS** (Big Sur to Sequoia) | Menu Bar Popover & Finder Context Menu | Right-click any folder in Finder ➔ **Observe with Re:triever** |
+| 🪟 **Windows** (Windows 10 & 11) | Taskbar Tray Popover & Explorer Right-Click | Right-click any folder in File Explorer ➔ **Observe with Re:triever** |
 
 ---
 
-## 🚀 Development & Building
+## 📥 Download & Installation
 
-### Prerequisites
+### Option 1: Download Ready-to-Run Installers
+Download the latest free release for your operating system:
+- **macOS**: Download the `.dmg` installer or `.zip` application.
+- **Windows**: Download the `.exe` installer.
 
-- **Node.js**: v18.0.0 or higher
-- **npm**: v9.0.0 or higher
-- **Rust Toolchain**: `cargo` & `rustc` ([rustup.rs](https://rustup.rs/))
-
-### 1. Clone & Setup
-
+### Option 2: Run from Source
+If you prefer running from source:
 ```bash
+# Clone the repository
 git clone https://github.com/Re-triever/Re-triever.git
 cd Re-triever
+
+# Install & Build
 npm install
-```
+npm run build
 
-### 2. Compile Rust Core Addon
-
-```bash
-npm run build:core
-```
-
-### 3. Run in Development Mode
-
-```bash
+# Launch Re:triever
 npm run electron:dev
 ```
 
-### 4. Build Production Packages
-
-```bash
-# Package for macOS (.dmg & .zip)
-npm run dist:mac
-
-# Package for Windows (.exe Installer)
-npm run dist:win
-```
-
-> [!IMPORTANT]
-> The built application installers will be exported to the `dist_app/` directory.
-
 ---
 
-## ⚡ OS Context Menu Usage
+## 🎯 How to Use Re:triever in 3 Easy Steps
 
-1. **macOS Finder**: Right-click any directory ➔ Select **Observe with Re:triever**.
-2. **Windows Explorer**: Right-click any directory ➔ Select **Observe with Re:triever**.
-3. **Tray Popover**: Click the **Re:triever** golden retriever icon in your top Menu Bar or System Tray to toggle the popover UI.
+1. **Watch a Folder**: Right-click any folder on your computer and click **"Observe with Re:triever"**.
+2. **Work Normally**: Edit and save your files in Word, VS Code, Photoshop, Excel, or any application as you normally do.
+3. **Time-Travel**: Click the golden retriever icon in your Menu Bar or System Tray anytime to inspect past versions, preview diffs, or restore any save!
 
 ---
 
 ## 📄 License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
+**Re:triever** is open-source software released under the **MIT License**. Free to use for personal, commercial, and creative projects forever.
 
 <div align="center">
 
   ---
-  <sub>Developed with ❤️ for <b>macOS</b> & <b>Windows</b> by the <b><span style="color: #FF6F1D;">Re</span><span style="color: #343636;">:triever</span></b> Core Team.</sub>
+  <sub>Created with ❤️ for <b>macOS</b> & <b>Windows</b> by the <b><span style="color: #FF6F1D;">Re</span><span style="color: #343636;">:triever</span></b> team.</sub>
 
 </div>
